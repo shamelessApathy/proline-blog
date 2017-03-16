@@ -1,0 +1,4 @@
+/* Hide image ID in custom widgets form */
+.about_me_media_id, .image_media_id, .su-vote {
+    display:none !important;
+}

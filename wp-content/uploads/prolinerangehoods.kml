@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+            <kml xmlns="http://www.opengis.net/kml/2.2">
+              <Placemark>
+                <name>Proline Range Hoods</name>
+                <description>Online Range Hood Store</description>
+                <Point>
+                  <coordinates>-111.8983752,40.7230288</coordinates>
+                </Point>
+              </Placemark>
+            </kml>

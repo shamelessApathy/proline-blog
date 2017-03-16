@@ -1,0 +1,207 @@
+@import url( 'wordchef-editor-fonts.css' );
+@import url( 'font-awesome.css' );
+
+#tinymce {
+    padding:0px 15px !important;
+    margin:0px;
+    direction:rtl;
+    unicode-bidi:embed;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    clear: both;
+    margin-bottom:15px;
+    line-height:1.1;
+}
+
+h1 {
+    font-size: 2em;
+}
+h2 {
+    font-size: 1.5em;
+}
+h3 {
+    font-size: 1.2em;
+}
+h4 {
+    font-size: 1em;
+}
+h5 {
+    font-size: 0.85em;
+}
+h6 {
+    font-size: 0.7em;
+}
+
+p {
+    margin-bottom: 1.5em;
+}
+
+blockquote {
+    margin:25px 0px;
+    text-align:center;
+    background-color:#fafafa;
+    padding:40px 30px;
+}
+
+blockquote p:before {
+    content:'\f10d';
+    display:block;
+    font-family:FontAwesome;
+    font-size:26px;
+    line-height:1;
+    font-style:normal;
+    margin-bottom:20px;
+}
+
+blockquote p:last-child {
+    margin-bottom:0px;
+}
+
+/*--------------------------------------------------------------
+3.0 Elements
+--------------------------------------------------------------*/
+hr {
+  background-color: #ccc;
+  border: 0;
+  height: 1px;
+  margin-bottom: 1.5em; 
+}
+
+ul {
+  list-style:disc; 
+}
+
+ol {
+  list-style: decimal; 
+}
+
+li > ul,
+li > ol {
+  margin-bottom: 0;
+  margin-left: 1.5em; 
+}
+
+dt {
+  font-weight: bold; 
+}
+
+dd {
+  margin: 0 1.5em 1.5em; 
+}
+
+table {
+    margin:0 0 1.5em;
+    width:100%; 
+    border-collapse:collapse;
+}
+
+th {
+    font-weight:bold; 
+}
+
+tr:nth-child(odd) {
+    background-color:#fafafa;
+}
+
+th {
+    text-align:right;
+    padding:8px;
+}
+
+td {
+    padding:8px;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor: pointer;
+    /* Improves usability and consistency of cursor style between image-type 'input' and others */
+    -webkit-appearance: button;
+    /* Corrects inability to style clickable 'input' types in iOS */
+    border-radius:0;
+    color:#fff;
+    font-size:11px !important;
+    line-height:1.5 !important;
+    font-weight:normal !important;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    padding:8px 14px;
+    max-width:100%;
+    border:4px solid;
+    -webkit-transition:color 0.3s ease, background-color 0.3s ease;
+    -moz-transition:color 0.3s ease, background-color 0.3s ease;
+    -o-transition:color 0.3s ease, background-color 0.3s ease;
+    transition:color 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea {
+    max-width:100%;
+    border-radius:0;
+    border:none !important;
+    background-color:#f4f4f8;
+    font-weight:normal;
+    line-height:1.5 !important;
+    color:#888; 
+    padding:12px 14px; 
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+/*----------------------------
+Gallery
+----------------------------*/
+.gallery .gallery-item {
+    float:right;
+}
+
+.alignleft {
+  display: inline;
+  float: left;
+  margin:5px 15px 10px 0px; 
+}
+
+.alignright {
+  display: inline;
+  float: right;
+  margin:5px 0px 10px 15px; 
+}
+
+img {
+  height: auto;
+  /* Make sure images are scaled correctly. */
+  max-width: 100%;
+  /* Adhere to container width. */ 
+}
+
+figure {
+  margin: 0; 
+}
+
+figcaption {
+    border-left:1px solid #e1e1e1;
+    border-right:1px solid #e1e1e1;
+    border-bottom:1px solid #e1e1e1;
+    margin-top:-5px !important;
+    padding:10px;
+    line-height:1.4 !important;
+    font-size:90% !important;
+}
+
+.gallery figcaption {
+    border-left:1px solid #e1e1e1;
+    border-right:1px solid #e1e1e1;
+    border-bottom:1px solid #e1e1e1;
+    margin:-5px 5px 0px 5px;
+    padding:10px;
+    line-height:1.4 !important;
+    font-size:90% !important;
+}

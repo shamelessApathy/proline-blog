@@ -1,0 +1,1018 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WordChef v1.0\n"
+"POT-Creation-Date: 2015-11-08 11:14+1200\n"
+"PO-Revision-Date: 2015-11-08 11:14+1200\n"
+"Last-Translator: \n"
+"Language-Team: ThemeFeeder <support@themefeeder.net>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-Basepath: ../\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: inc/tgm\n"
+"X-Poedit-SearchPathExcluded-1: themeoptions/core\n"
+"X-Poedit-SearchPathExcluded-2: themeoptions/inc\n"
+"X-Poedit-SearchPathExcluded-3: themeoptions/templates\n"
+
+#: comments.php:34 comments.php:54
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:35 comments.php:55
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:36 comments.php:56
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: comments.php:66
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:77
+msgid "Leave a Reply"
+msgstr ""
+
+#: comments.php:80
+msgid "Your email address will not be published."
+msgstr ""
+
+#: content-audio.php:48 content-gallery.php:82 content-grid.php:57
+#: content-list.php:60 content-page.php:26 content-single.php:31
+#: content-video.php:48 content.php:48 inc/init.php:117
+msgid "Edit"
+msgstr ""
+
+#: content-audio.php:80 content-gallery.php:114 content-page.php:33
+#: content-single.php:40 content-video.php:80 content.php:80
+msgid "Pages"
+msgstr ""
+
+#: content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: content-none.php:22
+msgid "Ready to publish your first post?"
+msgstr ""
+
+#: content-none.php:24
+msgid "Get started here"
+msgstr ""
+
+#: content-none.php:30
+msgid ""
+"Sorry, nothing matched your search. Please try again with different keywords."
+msgstr ""
+
+#: content-none.php:35
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: header.php:46
+msgid "Skip to content"
+msgstr ""
+
+#: inc/custom-widgets.php:8
+msgid "Your site&#8217;s most recent Posts with thumbnails."
+msgstr ""
+
+#: inc/custom-widgets.php:9
+msgid "WordChef Recent Posts"
+msgstr ""
+
+#: inc/custom-widgets.php:38
+msgid "Recent Posts"
+msgstr ""
+
+#: inc/custom-widgets.php:117 inc/custom-widgets.php:262
+#: inc/custom-widgets.php:356 inc/custom-widgets.php:447
+#: inc/custom-widgets.php:657 inc/custom-widgets.php:779
+msgid "Title:"
+msgstr ""
+
+#: inc/custom-widgets.php:120
+msgid "Number of posts to show:"
+msgstr ""
+
+#: inc/custom-widgets.php:133
+msgid "Your site&#8217;s most recent comments with thumbnails."
+msgstr ""
+
+#: inc/custom-widgets.php:134
+msgid "WordChef Recent Comments"
+msgstr ""
+
+#: inc/custom-widgets.php:183
+msgid "Recent Comments"
+msgstr ""
+
+#: inc/custom-widgets.php:265
+msgid "Number of comments to show:"
+msgstr ""
+
+#: inc/custom-widgets.php:278
+msgid "Displays most popular posts by view count"
+msgstr ""
+
+#: inc/custom-widgets.php:279
+msgid "WordChef Popular Posts"
+msgstr ""
+
+#: inc/custom-widgets.php:286
+msgid "Popular Posts"
+msgstr ""
+
+#: inc/custom-widgets.php:361
+msgid "Number of posts:"
+msgstr ""
+
+#: inc/custom-widgets.php:366
+msgid "Posted in the past X days:"
+msgstr ""
+
+#: inc/custom-widgets.php:369
+msgid "Use 0 for no time limit."
+msgstr ""
+
+#: inc/custom-widgets.php:382
+msgid "An image and short blurb about yourself."
+msgstr ""
+
+#: inc/custom-widgets.php:383
+msgid "WordChef About Me"
+msgstr ""
+
+#: inc/custom-widgets.php:452 inc/custom-widgets.php:534
+msgid "Image:"
+msgstr ""
+
+#: inc/custom-widgets.php:454 inc/custom-widgets.php:536
+msgid "Upload"
+msgstr ""
+
+#: inc/custom-widgets.php:455 inc/custom-widgets.php:537
+msgid "Remove"
+msgstr ""
+
+#: inc/custom-widgets.php:460
+msgid "Name:"
+msgstr ""
+
+#: inc/custom-widgets.php:465
+msgid "Text:"
+msgstr ""
+
+#: inc/custom-widgets.php:481
+msgid "An image with optional link."
+msgstr ""
+
+#: inc/custom-widgets.php:482
+msgid "WordChef Image Banner"
+msgstr ""
+
+#: inc/custom-widgets.php:542
+msgid "Link:"
+msgstr ""
+
+#: inc/custom-widgets.php:558
+msgid "Social media icon links."
+msgstr ""
+
+#: inc/custom-widgets.php:559
+msgid "WordChef Social Media"
+msgstr ""
+
+#: inc/custom-widgets.php:663
+msgid "Facebook:"
+msgstr ""
+
+#: inc/custom-widgets.php:668
+msgid "Twitter:"
+msgstr ""
+
+#: inc/custom-widgets.php:673
+msgid "Pinterest:"
+msgstr ""
+
+#: inc/custom-widgets.php:678
+msgid "Instagram:"
+msgstr ""
+
+#: inc/custom-widgets.php:683
+msgid "Tumblr:"
+msgstr ""
+
+#: inc/custom-widgets.php:688
+msgid "Google+:"
+msgstr ""
+
+#: inc/custom-widgets.php:693
+msgid "LinkedIn:"
+msgstr ""
+
+#: inc/custom-widgets.php:698
+msgid "YouTube:"
+msgstr ""
+
+#: inc/custom-widgets.php:703
+msgid "Vimeo:"
+msgstr ""
+
+#: inc/custom-widgets.php:708
+msgid "RSS:"
+msgstr ""
+
+#: inc/custom-widgets.php:724
+msgid "WordChef Facebook Like Box"
+msgstr ""
+
+#: inc/custom-widgets.php:725
+msgid "A Facebook Like Box"
+msgstr ""
+
+#: inc/custom-widgets.php:783
+msgid "Page Name: http://www.facebook.com/[page_name]"
+msgstr ""
+
+#: inc/custom-widgets.php:787
+msgid "Show Faces"
+msgstr ""
+
+#: inc/custom-widgets.php:791
+msgid "Show Posts"
+msgstr ""
+
+#: inc/custom-widgets.php:794
+msgid "Small Header"
+msgstr ""
+
+#: inc/custom-widgets.php:798
+msgid "Hide Cover Photo"
+msgstr ""
+
+#: inc/custom-widgets.php:802
+msgid "Facebook Locale (for translations):"
+msgstr ""
+
+#: inc/extras.php:64
+#, php-format
+msgid "Page %s"
+msgstr ""
+
+#: inc/featured-post-slider.php:61
+msgid "Read More"
+msgstr ""
+
+#: inc/init.php:67
+msgid "Primary Menu"
+msgstr ""
+
+#: inc/init.php:107
+msgid "says:"
+msgstr ""
+
+#: inc/init.php:110
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/mb-featured-page.php:25 inc/mb-featured-page.php:41
+msgid "Featured Page"
+msgstr ""
+
+#: inc/mb-featured-page.php:38
+msgid "Check to make this a featured page"
+msgstr ""
+
+#: inc/mb-featured-post.php:25
+msgid "Featured Post"
+msgstr ""
+
+#: inc/mb-featured-post.php:38
+msgid "Check to make this a featured post"
+msgstr ""
+
+#: inc/mb-featured-post.php:41
+msgid "Featured Item"
+msgstr ""
+
+#: inc/template-tags.php:24 page-blog.php:108
+#: page-full-post-grid2-left-sidebar.php:64
+#: page-full-post-grid2-no-sidebar.php:59
+#: page-full-post-grid2-right-sidebar.php:59 page-full-post-grid3.php:59
+#: page-full-post-list-left-sidebar.php:59
+#: page-full-post-list-no-sidebar.php:54
+#: page-full-post-list-right-sidebar.php:54 page-grid2-left-sidebar.php:55
+#: page-grid2-no-sidebar.php:50 page-grid2-right-sidebar.php:50
+#: page-grid3.php:50 page-list-left-sidebar.php:47 page-list-no-sidebar.php:42
+#: page-list-right-sidebar.php:42 page-standard-left-sidebar.php:47
+#: page-standard-no-sidebar.php:42 page-standard-right-sidebar.php:42
+msgid "Posts navigation"
+msgstr ""
+
+#: inc/template-tags.php:30 inc/template-tags.php:32 page-blog.php:113
+#: page-blog.php:115 page-full-post-grid2-left-sidebar.php:68
+#: page-full-post-grid2-no-sidebar.php:63
+#: page-full-post-grid2-right-sidebar.php:63 page-full-post-grid3.php:63
+#: page-full-post-list-left-sidebar.php:63
+#: page-full-post-list-no-sidebar.php:58
+#: page-full-post-list-right-sidebar.php:58 page-grid2-left-sidebar.php:59
+#: page-grid2-no-sidebar.php:54 page-grid2-right-sidebar.php:54
+#: page-grid3.php:54 page-list-left-sidebar.php:51 page-list-no-sidebar.php:46
+#: page-list-right-sidebar.php:46 page-standard-left-sidebar.php:51
+#: page-standard-no-sidebar.php:46 page-standard-right-sidebar.php:46
+msgid "Newer posts"
+msgstr ""
+
+#: inc/template-tags.php:40 inc/template-tags.php:42 page-blog.php:121
+#: page-blog.php:123 page-full-post-grid2-left-sidebar.php:72
+#: page-full-post-grid2-no-sidebar.php:67
+#: page-full-post-grid2-right-sidebar.php:67 page-full-post-grid3.php:67
+#: page-full-post-list-left-sidebar.php:67
+#: page-full-post-list-no-sidebar.php:62
+#: page-full-post-list-right-sidebar.php:62 page-grid2-left-sidebar.php:63
+#: page-grid2-no-sidebar.php:58 page-grid2-right-sidebar.php:58
+#: page-grid3.php:58 page-list-left-sidebar.php:55 page-list-no-sidebar.php:50
+#: page-list-right-sidebar.php:50 page-standard-left-sidebar.php:55
+#: page-standard-no-sidebar.php:50 page-standard-right-sidebar.php:50
+msgid "Older posts"
+msgstr ""
+
+#: inc/template-tags.php:191
+msgid "Comments"
+msgstr ""
+
+#: inc/template-tags.php:191
+msgid "Comment"
+msgstr ""
+
+#: inc/template-tags.php:237
+#, php-format
+msgid "Archives: %s"
+msgstr ""
+
+#: inc/template-tags.php:243
+msgid "Archives"
+msgstr ""
+
+#: inc/user-social-profiles.php:5
+msgid "Facebook URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:6
+msgid "Twitter URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:7
+msgid "Pinterest URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:8
+msgid "Instagram URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:9
+msgid "Tumblr URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:10
+msgid "Google+ URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:11
+msgid "LinkedIn URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:12
+msgid "YouTube URL"
+msgstr ""
+
+#: inc/user-social-profiles.php:13
+msgid "Vimeo URL"
+msgstr ""
+
+#: inc/widget-area-setup.php:11
+msgid "Sidebar"
+msgstr ""
+
+#: inc/widget-area-setup.php:21
+msgid "Footer Full width"
+msgstr ""
+
+#: inc/widget-area-setup.php:31
+msgid "Footer Column 1"
+msgstr ""
+
+#: inc/widget-area-setup.php:41
+msgid "Footer Column 2"
+msgstr ""
+
+#: inc/widget-area-setup.php:51
+msgid "Footer Column 3"
+msgstr ""
+
+#: search.php:26
+#, php-format
+msgid "Search results for %s"
+msgstr ""
+
+#: searchform.php:3
+msgid "Type and hit enter..."
+msgstr ""
+
+#: searchform.php:4
+msgid "Search"
+msgstr ""
+
+#: themeoptions/options.php:82
+msgid "General Settings"
+msgstr ""
+
+#: themeoptions/options.php:90
+msgid "Logo Upload"
+msgstr ""
+
+#: themeoptions/options.php:91
+msgid "Upload a logo for you site"
+msgstr ""
+
+#: themeoptions/options.php:103
+msgid "Logo Spacing"
+msgstr ""
+
+#: themeoptions/options.php:104
+msgid "Choose the pixel spacing above and below the site logo."
+msgstr ""
+
+#: themeoptions/options.php:114
+msgid "Site Title Font"
+msgstr ""
+
+#: themeoptions/options.php:120
+msgid "Select style and size for site title."
+msgstr ""
+
+#: themeoptions/options.php:134
+msgid "Site Tagline Font"
+msgstr ""
+
+#: themeoptions/options.php:140
+msgid "Select style and size for site tagline."
+msgstr ""
+
+#: themeoptions/options.php:154
+msgid "Retina Images"
+msgstr ""
+
+#: themeoptions/options.php:155
+msgid "Enable or disable retina images for retina devices."
+msgstr ""
+
+#: themeoptions/options.php:166
+msgid "Lightbox Images"
+msgstr ""
+
+#: themeoptions/options.php:167
+msgid "Enable or disable lightbox effect for post images."
+msgstr ""
+
+#: themeoptions/options.php:178
+msgid "Page Comments"
+msgstr ""
+
+#: themeoptions/options.php:179
+msgid "Turn comments on or off for all pages."
+msgstr ""
+
+#: themeoptions/options.php:190
+msgid "Pagination Type"
+msgstr ""
+
+#: themeoptions/options.php:191
+msgid "Select the type of pagination for your blog."
+msgstr ""
+
+#: themeoptions/options.php:202
+msgid "Loading Screen"
+msgstr ""
+
+#: themeoptions/options.php:203
+msgid "Turn the page loading screen on or off"
+msgstr ""
+
+#: themeoptions/options.php:214
+msgid "RTL (Right-to-Left) Language"
+msgstr ""
+
+#: themeoptions/options.php:215
+msgid "Turn on if your blog is rtl"
+msgstr ""
+
+#: themeoptions/options.php:230
+msgid "Menu Settings"
+msgstr ""
+
+#: themeoptions/options.php:240
+msgid "Navigation Bar"
+msgstr ""
+
+#: themeoptions/options.php:246
+msgid "Fixed Navigation"
+msgstr ""
+
+#: themeoptions/options.php:247
+msgid "Turn on to fix your navigation to the top of the screen"
+msgstr ""
+
+#: themeoptions/options.php:259
+msgid "Navigation Bar Background Color"
+msgstr ""
+
+#: themeoptions/options.php:260
+msgid "Choose the background color for the navigation bar"
+msgstr ""
+
+#: themeoptions/options.php:270
+msgid "Navigation Bar Font Color"
+msgstr ""
+
+#: themeoptions/options.php:282
+msgid "Navigation Font"
+msgstr ""
+
+#: themeoptions/options.php:290
+msgid "Select style and size for the navigation bar."
+msgstr ""
+
+#: themeoptions/options.php:303
+msgid "Navigation Sub Menus"
+msgstr ""
+
+#: themeoptions/options.php:310
+msgid "Sub Menu Background Color"
+msgstr ""
+
+#: themeoptions/options.php:311
+msgid "Choose the background color for the navigation sub menus"
+msgstr ""
+
+#: themeoptions/options.php:321
+msgid "Sub Menu Font Color"
+msgstr ""
+
+#: themeoptions/options.php:333
+msgid "Sub Menu Font"
+msgstr ""
+
+#: themeoptions/options.php:341
+msgid "Select style and size for the navigation sub menus."
+msgstr ""
+
+#: themeoptions/options.php:354
+msgid "Mobile Navigation"
+msgstr ""
+
+#: themeoptions/options.php:361
+msgid "Mobile Menu Toggle Button Color"
+msgstr ""
+
+#: themeoptions/options.php:370
+msgid "Social and Search"
+msgstr ""
+
+#: themeoptions/options.php:375
+msgid "Search Button"
+msgstr ""
+
+#: themeoptions/options.php:376
+msgid "Turn the navigation search button on or off"
+msgstr ""
+
+#: themeoptions/options.php:387
+msgid "Social Button"
+msgstr ""
+
+#: themeoptions/options.php:388
+msgid "Turn the navigation social button on or off"
+msgstr ""
+
+#: themeoptions/options.php:400
+msgid "Search Button Color"
+msgstr ""
+
+#: themeoptions/options.php:401
+msgid "Select color for the search button."
+msgstr ""
+
+#: themeoptions/options.php:411
+msgid "Social Buttons Color"
+msgstr ""
+
+#: themeoptions/options.php:412
+msgid "Select color for the social buttons."
+msgstr ""
+
+#: themeoptions/options.php:421 themeoptions/options.php:1072
+msgid "Facebook"
+msgstr ""
+
+#: themeoptions/options.php:422 themeoptions/options.php:1073
+msgid "Enter the url to your Facebook page"
+msgstr ""
+
+#: themeoptions/options.php:429 themeoptions/options.php:1080
+msgid "Twitter"
+msgstr ""
+
+#: themeoptions/options.php:430 themeoptions/options.php:1081
+msgid "Enter the url to your Twitter page"
+msgstr ""
+
+#: themeoptions/options.php:437 themeoptions/options.php:1088
+msgid "Pinterest"
+msgstr ""
+
+#: themeoptions/options.php:438 themeoptions/options.php:1089
+msgid "Enter the url to your Pinterest page"
+msgstr ""
+
+#: themeoptions/options.php:445 themeoptions/options.php:1096
+msgid "Instagram"
+msgstr ""
+
+#: themeoptions/options.php:446 themeoptions/options.php:1097
+msgid "Enter the url to your Instagram page"
+msgstr ""
+
+#: themeoptions/options.php:453 themeoptions/options.php:1104
+msgid "Tumblr"
+msgstr ""
+
+#: themeoptions/options.php:454 themeoptions/options.php:1105
+msgid "Enter the url to your Tumblr page"
+msgstr ""
+
+#: themeoptions/options.php:461 themeoptions/options.php:1112
+msgid "Google+"
+msgstr ""
+
+#: themeoptions/options.php:462 themeoptions/options.php:1113
+msgid "Enter the url to your Google+ page"
+msgstr ""
+
+#: themeoptions/options.php:469 themeoptions/options.php:1120
+msgid "LinkedIn"
+msgstr ""
+
+#: themeoptions/options.php:470 themeoptions/options.php:1121
+msgid "Enter the url to your LinkedIn page"
+msgstr ""
+
+#: themeoptions/options.php:477 themeoptions/options.php:1128
+msgid "YouTube"
+msgstr ""
+
+#: themeoptions/options.php:478 themeoptions/options.php:1129
+msgid "Enter the url to your YouTube page"
+msgstr ""
+
+#: themeoptions/options.php:485 themeoptions/options.php:1136
+msgid "Vimeo"
+msgstr ""
+
+#: themeoptions/options.php:486 themeoptions/options.php:1137
+msgid "Enter the url to your Vimeo page"
+msgstr ""
+
+#: themeoptions/options.php:493 themeoptions/options.php:1144
+msgid "RSS"
+msgstr ""
+
+#: themeoptions/options.php:494 themeoptions/options.php:1145
+msgid "Enter the url to your RSS"
+msgstr ""
+
+#: themeoptions/options.php:506
+msgid "Slider Settings"
+msgstr ""
+
+#: themeoptions/options.php:513
+msgid "Featured Posts Slider"
+msgstr ""
+
+#: themeoptions/options.php:514
+msgid "Turn the featured posts slider on or off."
+msgstr ""
+
+#: themeoptions/options.php:525
+msgid "Max Number of Featured Posts"
+msgstr ""
+
+#: themeoptions/options.php:526
+msgid ""
+"Choose the maximum number of posts to appear in the featured post slider."
+msgstr ""
+
+#: themeoptions/options.php:537
+msgid "Featured Post Order"
+msgstr ""
+
+#: themeoptions/options.php:538
+msgid "Choose the order of the featured posts."
+msgstr ""
+
+#: themeoptions/options.php:554
+msgid "Layout Options"
+msgstr ""
+
+#: themeoptions/options.php:561
+msgid "Layout Type"
+msgstr ""
+
+#: themeoptions/options.php:562
+msgid "Select the main layout for your site."
+msgstr ""
+
+#: themeoptions/options.php:573
+msgid "Blog Layout"
+msgstr ""
+
+#: themeoptions/options.php:589
+msgid "Blog Page Sidebar"
+msgstr ""
+
+#: themeoptions/options.php:590
+msgid "Choose between left, right or no sidebar for the blog page"
+msgstr ""
+
+#: themeoptions/options.php:602
+msgid "Single Post Sidebar"
+msgstr ""
+
+#: themeoptions/options.php:603
+msgid "Choose between left, right or no sidebar for single blog posts"
+msgstr ""
+
+#: themeoptions/options.php:615
+msgid "Archive Page Sidebar"
+msgstr ""
+
+#: themeoptions/options.php:616
+msgid "Choose between left, right or no sidebar for the archive page"
+msgstr ""
+
+#: themeoptions/options.php:628
+msgid "Search Results Sidebar"
+msgstr ""
+
+#: themeoptions/options.php:629
+msgid "Choose between left, right or no sidebar for the search results page"
+msgstr ""
+
+#: themeoptions/options.php:645
+msgid "Post Options"
+msgstr ""
+
+#: themeoptions/options.php:654
+msgid "Homepage Post Content"
+msgstr ""
+
+#: themeoptions/options.php:655
+msgid ""
+"Choose whether to display the posts full content or excerpt on homepage."
+msgstr ""
+
+#: themeoptions/options.php:666
+msgid "Post Share Options"
+msgstr ""
+
+#: themeoptions/options.php:667
+msgid "Choose where posts can be shared to"
+msgstr ""
+
+#: themeoptions/options.php:699
+msgid "Single Post Tags"
+msgstr ""
+
+#: themeoptions/options.php:700
+msgid "Choose to show or hide the tags on single posts."
+msgstr ""
+
+#: themeoptions/options.php:711
+msgid "Single Post Author Bio"
+msgstr ""
+
+#: themeoptions/options.php:712
+msgid "Choose to show or hide the author bio on single posts."
+msgstr ""
+
+#: themeoptions/options.php:723
+msgid "Read More Text"
+msgstr ""
+
+#: themeoptions/options.php:724
+msgid "Choose the text that appears on a blog post to continue reading it."
+msgstr ""
+
+#: themeoptions/options.php:735
+msgid "Typography"
+msgstr ""
+
+#: themeoptions/options.php:742
+msgid "Body Font"
+msgstr ""
+
+#: themeoptions/options.php:749
+msgid "Select style and size for paragraphs."
+msgstr ""
+
+#: themeoptions/options.php:763
+msgid "Headings Font"
+msgstr ""
+
+#: themeoptions/options.php:774
+msgid "Select style and size for headings h1, h2, h3, h4, h5, h6."
+msgstr ""
+
+#: themeoptions/options.php:785
+msgid "Post Title Font"
+msgstr ""
+
+#: themeoptions/options.php:791
+msgid "Select style and size for post titles."
+msgstr ""
+
+#: themeoptions/options.php:805
+msgid "Post Meta Font"
+msgstr ""
+
+#: themeoptions/options.php:811
+msgid "Select style and size for post meta."
+msgstr ""
+
+#: themeoptions/options.php:825
+msgid "Page Title Font"
+msgstr ""
+
+#: themeoptions/options.php:831
+msgid "Select style and size for page titles."
+msgstr ""
+
+#: themeoptions/options.php:845
+msgid "Widget Title Font"
+msgstr ""
+
+#: themeoptions/options.php:851
+msgid "Select style and size for widget titles."
+msgstr ""
+
+#: themeoptions/options.php:869
+msgid "Styling Options"
+msgstr ""
+
+#: themeoptions/options.php:879
+msgid "Body Background Color"
+msgstr ""
+
+#: themeoptions/options.php:888
+msgid "Body Text Color"
+msgstr ""
+
+#: themeoptions/options.php:899
+msgid "Titles Color"
+msgstr ""
+
+#: themeoptions/options.php:900
+msgid "Select a color for post and page titles"
+msgstr ""
+
+#: themeoptions/options.php:910
+msgid "Widget Titles Color"
+msgstr ""
+
+#: themeoptions/options.php:911
+msgid "Select a color for widget titles"
+msgstr ""
+
+#: themeoptions/options.php:922
+msgid "Links color"
+msgstr ""
+
+#: themeoptions/options.php:931
+msgid "Primary Color"
+msgstr ""
+
+#: themeoptions/options.php:932
+msgid "Select the primary color for your website"
+msgstr ""
+
+#: themeoptions/options.php:947
+msgid "CSS Editor"
+msgstr ""
+
+#: themeoptions/options.php:948
+msgid "Add your custom CSS code here."
+msgstr ""
+
+#: themeoptions/options.php:962
+msgid "Footer Settings"
+msgstr ""
+
+#: themeoptions/options.php:971
+msgid "Footer Background Color"
+msgstr ""
+
+#: themeoptions/options.php:980
+msgid "Footer Logo Upload"
+msgstr ""
+
+#: themeoptions/options.php:981
+msgid "Upload a logo for you footer"
+msgstr ""
+
+#: themeoptions/options.php:994
+msgid "Footer Logo Top Spacing"
+msgstr ""
+
+#: themeoptions/options.php:995
+msgid "Choose the pixel spacing above the footer logo."
+msgstr ""
+
+#: themeoptions/options.php:1005
+msgid "Copyright Text"
+msgstr ""
+
+#: themeoptions/options.php:1021
+msgid "Copyright Bar Text"
+msgstr ""
+
+#: themeoptions/options.php:1022
+msgid "Text to appear in the copyright bar"
+msgstr ""
+
+#: themeoptions/options.php:1033
+msgid "Footer Social Links"
+msgstr ""
+
+#: themeoptions/options.php:1039
+msgid "Footer Social Bar"
+msgstr ""
+
+#: themeoptions/options.php:1040
+msgid "Turn the footer social bar on or off"
+msgstr ""
+
+#: themeoptions/options.php:1052
+msgid "Footer Social Section Background Color"
+msgstr ""
+
+#: themeoptions/options.php:1053
+msgid "Choose the background color for the footer social section"
+msgstr ""
+
+#: themeoptions/options.php:1062
+msgid "Footer Social Icon Color"
+msgstr ""
+
+#: themeoptions/options.php:1063
+msgid "Choose the color for the footer social icons"
+msgstr ""
+
+#: themeoptions/options.php:1157
+msgid "Misc Settings"
+msgstr ""
+
+#: themeoptions/options.php:1166
+msgid "Scroll To Top Button"
+msgstr ""
+
+#: themeoptions/options.php:1167
+msgid "Button that when clicked, scrolls to the top of the web page."
+msgstr ""
+
+#: themeoptions/options.php:1178
+msgid "404 Page Text"
+msgstr ""
+
+#: themeoptions/options.php:1196
+msgid "Support"
+msgstr ""
+
+#: themeoptions/options.php:1197
+msgid ""
+"If you need any help with the theme options, please contact "
+"support@themefeeder.net"
+msgstr ""
+
+#: themeoptions/options.php:1224 themeoptions/options.php:1225
+msgid "Theme Options"
+msgstr ""

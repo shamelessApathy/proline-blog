@@ -1,0 +1,12 @@
+[07-Jul-2016 12:17:54 America/Denver] PHP Fatal error:  Call to undefined function get_template_directory() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/functions.php on line 7
+[08-Jul-2016 03:26:23 America/Denver] PHP Fatal error:  Call to undefined function get_template_directory() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/functions.php on line 7
+[26-Jul-2016 07:39:38 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/404.php on line 13
+[01-Aug-2016 13:22:23 America/Denver] PHP Fatal error:  Call to undefined function get_header() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/archive.php on line 12
+[02-Aug-2016 21:56:48 America/Denver] PHP Fatal error:  Call to undefined function get_template_directory() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/functions.php on line 7
+[03-Aug-2016 11:14:01 America/Denver] PHP Fatal error:  Call to undefined function get_template_directory() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/functions.php on line 7
+[05-Aug-2016 11:58:57 America/Denver] PHP Fatal error:  Call to undefined function get_template_directory() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/functions.php on line 7
+[07-Aug-2016 09:42:05 America/Denver] PHP Fatal error:  Call to undefined function language_attributes() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/header.php on line 11
+[07-Aug-2016 09:42:05 America/Denver] PHP Fatal error:  Call to undefined function get_sidebar() in /home5/islandi7/public_html/prolinekitchenblog/wp-content/themes/wordchef/footer.php on line 16
+[03-Feb-2017 02:15:53 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/prolinerangehood/public_html/blog/wp-content/themes/wordchef/index.php on line 16
+[03-Feb-2017 02:15:59 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/prolinerangehood/public_html/blog/wp-content/themes/wordchef/index.php on line 16
+[06-Feb-2017 10:22:37 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/prolinerangehood/public_html/blog/wp-content/themes/wordchef/index.php on line 16
