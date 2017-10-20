@@ -1,7 +1,9 @@
 <?php
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class Preview {
 
@@ -16,13 +18,20 @@ class Preview {
 			return;
 		}
 
+		// Compatibility with Yoast SEO plugin when 'Removes unneeded query variables from the URL' enabled.
+		// TODO: Move this code to `includes/compatibility.php`.
+		if ( class_exists( 'WPSEO_Frontend' ) ) {
+			remove_action( 'template_redirect', [ \WPSEO_Frontend::get_instance(), 'clean_permalink' ], 1 );
+		}
+
 		// Disable the WP admin bar in preview mode.
 		add_filter( 'show_admin_bar', '__return_false' );
 
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
-		add_action( 'wp_head', [ $this, 'print_custom_css' ] );
+		add_action( 'wp_enqueue_scripts', function() {
+			$this->enqueue_styles();
+			$this->enqueue_scripts();
+		} );
 
-		add_filter( 'body_class', [ $this, 'body_class' ] );
 		add_filter( 'the_content', [ $this, 'builder_wrapper' ], 999999 );
 
 		// Tell to WP Cache plugins do not cache this request.
@@ -48,38 +57,15 @@ class Preview {
 	}
 
 	/**
-	 * Add custom class in `<body>` element.
-	 *
-	 * @since 1.0.0
-	 * @param array $classes
-	 *
-	 * @return array
-	 */
-	public function body_class( $classes = [] ) {
-		$classes[] = 'elementor-body';
-		return $classes;
-	}
-
-	/**
-	 * Do not show the conent from the page. Just print empty start HTML.
+	 * Do not show the content from the page. Just print empty start HTML.
 	 * The Javascript will add the content later.
 	 *
 	 * @since 1.0.0
-	 * @param string $content
 	 *
 	 * @return string
 	 */
-	public function builder_wrapper( $content ) {
+	public function builder_wrapper() {
 		return '<div id="elementor" class="elementor elementor-edit-mode"></div>';
-	}
-
-	public function print_custom_css() {
-		$container_width = absint( get_option( 'elementor_container_width' ) );
-		if ( empty( $container_width ) ) {
-			return;
-		}
-
-		?><style>.elementor-section.elementor-section-boxed > .elementor-container{max-width: <?php echo esc_html( $container_width ); ?>px</style><?php
 	}
 
 	/**
@@ -88,12 +74,9 @@ class Preview {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function enqueue_styles() {
-		// Hold-on all jQuery plugins after all HTML markup render
+	private function enqueue_styles() {
+		// Hold-on all jQuery plugins after all HTML markup render.
 		wp_add_inline_script( 'jquery-migrate', 'jQuery.holdReady( true );' );
-
-		// Make sure jQuery embed in preview window
-		wp_enqueue_script( 'jquery' );
 
 		Plugin::$instance->frontend->enqueue_styles();
 
@@ -113,12 +96,21 @@ class Preview {
 		do_action( 'elementor/preview/enqueue_styles' );
 	}
 
+	private function enqueue_scripts() {
+		Plugin::$instance->frontend->register_scripts();
+		Plugin::$instance->frontend->enqueue_scripts();
+
+		Plugin::$instance->widgets_manager->enqueue_widgets_scripts();
+
+		do_action( 'elementor/preview/enqueue_scripts' );
+	}
+
 	/**
 	 * Preview constructor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'template_redirect', [ $this, 'init' ] );
+		add_action( 'template_redirect', [ $this, 'init' ], 0 );
 	}
 }

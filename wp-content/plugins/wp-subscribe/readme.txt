@@ -1,10 +1,10 @@
 === WP Subscribe ===
 Contributors: mythemeshop
 Creator's website link: http://mythemeshop.com/plugins/wp-subscribe/
-Tags: subscribe, subscription, subscription box, newsletter, subscribe widget, mailchimp, aweber, feedburner, 
-Requires at least: 3.0.1
-Tested up to: 4.5
-Stable tag: 1.1.3
+Tags: subscribe, subscription, subscription box, newsletter, subscribe widget, mailchimp, aweber, feedburner,
+Requires at least: 4.0
+Tested up to: 4.7.3
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,7 +31,6 @@ See the WP Subscribe Plugin in action on our demo page: <a href="http://demo.myt
 * Super lightweight.
 * Compatible with caching and SEO plugins.
 * Eye-catching design.
-* Choose between 3 unique styles of thumbnails: small, big or no thumbnails.
 * Position it anywhere where a widget is configured in your theme.
 
 = Support =
@@ -58,7 +57,7 @@ GitHub link: <a href="https://github.com/MyThemeShop/WP-Subscribe/">https://gith
 
 = Feedback =
 If you like this plugin, then please leave us a good rating and review.<br/>
-Consider following us on <a rel="author" href="https://plus.google.com/+Mythemeshop/">Google+</a>, <a href="https://twitter.com/MyThemeShopTeam">Twitter</a>, and <a href="https://www.facebook.com/MyThemeShop">Facebook</a> 
+Consider following us on <a rel="author" href="https://plus.google.com/+Mythemeshop/">Google+</a>, <a href="https://twitter.com/MyThemeShopTeam">Twitter</a>, and <a href="https://www.facebook.com/MyThemeShop">Facebook</a>
 
 == Installation ==
 
@@ -82,6 +81,34 @@ Please disable all plugins and check if plugin is working properly. Then you can
 2. WP Subscribe Settings
 
 == Changelog ==
+
+= 1.2.3 =
+* Fixed some CSS issues
+
+= 1.2.2 =
+* Fixed some javascript issues
+* Fixed some credentials in Aweber
+* Improve Mailchimp class
+* Remove notices and warnings on some places
+* Change the behavior of saving mailing service lists
+
+= 1.2.1 =
+* Provided backward compatibility for CSS
+* Provided backward compatibility for Scoped CSS
+* Remove magnific popup classes from inline form
+* Add loader when submitting form
+* Fixed inline form responsiveness
+* Minify the CSS File
+
+= 1.2.0 =
+* Whole plugin is re-written in OOP
+* Huge performance Improvements
+* Moved JS and CSS folders inside assets folder
+* Enhanced: Functions are more organized in wps-helpers and wps-functions-options file.
+* Fixed: Missing and in-correct textdomain
+
+= 1.1.4 =
+* Changed AWeber form URL to HTTPS
 
 = 1.1.3 =
 * Added option to enable name field

@@ -1,22 +1,56 @@
 <?php
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
+/**
+ * Button Widget
+ */
 class Widget_Button extends Widget_Base {
 
+	/**
+	 * Retrieve button widget name.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'button';
 	}
 
+	/**
+	 * Retrieve button widget title.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Button', 'elementor' );
 	}
 
+	/**
+	 * Retrieve button widget icon.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-button';
 	}
 
+	/**
+	 * Retrieve button sizes.
+	 *
+	 * @access public
+	 * @static
+	 *
+	 * @return array An array containing button sizes.
+	 */
 	public static function get_button_sizes() {
 		return [
 			'xs' => __( 'Extra Small', 'elementor' ),
@@ -27,6 +61,13 @@ class Widget_Button extends Widget_Base {
 		];
 	}
 
+	/**
+	 * Register button widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_button',
@@ -183,7 +224,7 @@ class Widget_Button extends Widget_Base {
 				'name' => 'typography',
 				'label' => __( 'Typography', 'elementor' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_4,
-				'selector' => '{{WRAPPER}} a.elementor-button',
+				'selector' => '{{WRAPPER}} a.elementor-button, {{WRAPPER}} .elementor-button',
 			]
 		);
 
@@ -203,7 +244,7 @@ class Widget_Button extends Widget_Base {
 				'type' => Controls_Manager::COLOR,
 				'default' => '',
 				'selectors' => [
-					'{{WRAPPER}} a.elementor-button' => 'color: {{VALUE}};',
+					'{{WRAPPER}} a.elementor-button, {{WRAPPER}} .elementor-button' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -218,7 +259,7 @@ class Widget_Button extends Widget_Base {
 					'value' => Scheme_Color::COLOR_4,
 				],
 				'selectors' => [
-					'{{WRAPPER}} a.elementor-button' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a.elementor-button, {{WRAPPER}} .elementor-button' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -238,7 +279,7 @@ class Widget_Button extends Widget_Base {
 				'label' => __( 'Text Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} a.elementor-button:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} a.elementor-button:hover, {{WRAPPER}} .elementor-button:hover' => 'color: {{VALUE}};',
 				],
 			]
 		);
@@ -249,7 +290,7 @@ class Widget_Button extends Widget_Base {
 				'label' => __( 'Background Color', 'elementor' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
-					'{{WRAPPER}} a.elementor-button:hover' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} a.elementor-button:hover, {{WRAPPER}} .elementor-button:hover' => 'background-color: {{VALUE}};',
 				],
 			]
 		);
@@ -263,7 +304,7 @@ class Widget_Button extends Widget_Base {
 					'border_border!' => '',
 				],
 				'selectors' => [
-					'{{WRAPPER}} a.elementor-button:hover' => 'border-color: {{VALUE}};',
+					'{{WRAPPER}} a.elementor-button:hover, {{WRAPPER}} .elementor-button:hover' => 'border-color: {{VALUE}};',
 				],
 			]
 		);
@@ -288,6 +329,7 @@ class Widget_Button extends Widget_Base {
 				'placeholder' => '1px',
 				'default' => '1px',
 				'selector' => '{{WRAPPER}} .elementor-button',
+				'separator' => 'before',
 			]
 		);
 
@@ -298,7 +340,7 @@ class Widget_Button extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.elementor-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a.elementor-button, {{WRAPPER}} .elementor-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -318,7 +360,7 @@ class Widget_Button extends Widget_Base {
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', 'em', '%' ],
 				'selectors' => [
-					'{{WRAPPER}} a.elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} a.elementor-button, {{WRAPPER}} .elementor-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 				'separator' => 'before',
 			]
@@ -327,6 +369,13 @@ class Widget_Button extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render button widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -336,8 +385,12 @@ class Widget_Button extends Widget_Base {
 			$this->add_render_attribute( 'button', 'href', $settings['link']['url'] );
 			$this->add_render_attribute( 'button', 'class', 'elementor-button-link' );
 
-			if ( ! empty( $settings['link']['is_external'] ) ) {
+			if ( $settings['link']['is_external'] ) {
 				$this->add_render_attribute( 'button', 'target', '_blank' );
+			}
+
+			if ( $settings['link']['nofollow'] ) {
+				$this->add_render_attribute( 'button', 'rel', 'nofollow' );
 			}
 		}
 
@@ -351,25 +404,22 @@ class Widget_Button extends Widget_Base {
 			$this->add_render_attribute( 'button', 'class', 'elementor-animation-' . $settings['hover_animation'] );
 		}
 
-		$this->add_render_attribute( 'content-wrapper', 'class', 'elementor-button-content-wrapper' );
-		$this->add_render_attribute( 'icon-align', 'class', 'elementor-align-icon-' . $settings['icon_align'] );
-		$this->add_render_attribute( 'icon-align', 'class', 'elementor-button-icon' );
 		?>
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
 			<a <?php echo $this->get_render_attribute_string( 'button' ); ?>>
-				<span <?php echo $this->get_render_attribute_string( 'content-wrapper' ); ?>>
-					<?php if ( ! empty( $settings['icon'] ) ) : ?>
-						<span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
-							<i class="<?php echo esc_attr( $settings['icon'] ); ?>"></i>
-						</span>
-					<?php endif; ?>
-					<span class="elementor-button-text"><?php echo $settings['text']; ?></span>
-				</span>
+				<?php $this->render_text(); ?>
 			</a>
 		</div>
 		<?php
 	}
 
+	/**
+	 * Render button widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @access protected
+	 */
 	protected function _content_template() {
 		?>
 		<div class="elementor-button-wrapper">
@@ -384,6 +434,28 @@ class Widget_Button extends Widget_Base {
 				</span>
 			</a>
 		</div>
+		<?php
+	}
+
+	/**
+	 * Render button widget text.
+	 *
+	 * @access protected
+	 */
+	protected function render_text() {
+		$settings = $this->get_settings();
+		$this->add_render_attribute( 'content-wrapper', 'class', 'elementor-button-content-wrapper' );
+		$this->add_render_attribute( 'icon-align', 'class', 'elementor-align-icon-' . $settings['icon_align'] );
+		$this->add_render_attribute( 'icon-align', 'class', 'elementor-button-icon' );
+		?>
+		<span <?php echo $this->get_render_attribute_string( 'content-wrapper' ); ?>>
+			<?php if ( ! empty( $settings['icon'] ) ) : ?>
+			<span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
+				<i class="<?php echo esc_attr( $settings['icon'] ); ?>"></i>
+			</span>
+			<?php endif; ?>
+			<span class="elementor-button-text"><?php echo $settings['text']; ?></span>
+		</span>
 		<?php
 	}
 }

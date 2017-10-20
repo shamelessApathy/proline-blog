@@ -1,60 +1,117 @@
 <?php
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
-abstract class Element_Base {
-
-	const RESPONSIVE_DESKTOP = 'desktop';
-	const RESPONSIVE_TABLET = 'tablet';
-	const RESPONSIVE_MOBILE = 'mobile';
-
-	private $_id;
-
-	private $_settings;
-
-	private $_data;
-
-	private $_config;
+/**
+ * Element Base
+ *
+ * Base class extended to register elements.
+ *
+ * This class must be extended for each element.
+ *
+ * @abstract
+ */
+abstract class Element_Base extends Controls_Stack {
 
 	/**
+	 * Child elements.
+	 *
+	 * Holds all the child elements of the element.
+	 *
+	 * @access private
+	 *
 	 * @var Element_Base[]
 	 */
 	private $_children;
 
+	/**
+	 * Element render attributes.
+	 *
+	 * Holds all the render attributes of the element. Used to store data like
+	 * the HTML class name and the class value, or HTML element ID name and value.
+	 *
+	 * @access private
+	 *
+	 * @var array
+	 */
 	private $_render_attributes = [];
 
+	/**
+	 * Element default arguments.
+	 *
+	 * Holds all the default arguments of the element. Used to store additional
+	 * data. For example WordPress widgets use this to store widget names.
+	 *
+	 * @access private
+	 *
+	 * @var array
+	 */
 	private $_default_args = [];
 
+	/**
+	 * Element edit tools.
+	 *
+	 * Holds all the edit tools of the element. For example: delete, duplicate etc.
+	 *
+	 * @access protected
+	 * @static
+	 *
+	 * @var array
+	 */
 	protected static $_edit_tools;
 
 	/**
-	 * Holds the current section while render a set of controls sections
+	 * Is type instance.
 	 *
-	 * @var null|array
-	 */
-	private $_current_section = null;
-
-	/**
-	 * Holds the current tab while render a set of controls tabs
+	 * Whether the element is an instance of that type or not.
 	 *
-	 * @var null|array
+	 * @access private
+	 *
+	 * @var bool
 	 */
-	protected $_current_tab = null;
-
 	private $_is_type_instance = true;
 
+	/**
+	 * Retrieve script dependencies.
+	 *
+	 * Get the list of script dependencies the element requires.
+	 *
+	 * @access public
+	 *
+	 * @return array Widget scripts dependencies.
+	 */
 	public function get_script_depends() {
 		return [];
 	}
 
+	/**
+	 * Enqueue scripts.
+	 *
+	 * Registers all the scripts defined as element dependencies and enqueues
+	 * them. Use `get_script_depends()` method to add custom script dependencies.
+	 *
+	 * @access public
+	 */
 	final public function enqueue_scripts() {
 		foreach ( $this->get_script_depends() as $script ) {
 			wp_enqueue_script( $script );
 		}
 	}
 
-	public final static function get_edit_tools() {
+	/**
+	 * Retrieve element edit tools.
+	 *
+	 * Used to get the element edit tools.
+	 *
+	 * @access public
+	 * @static
+	 *
+	 * @return array Element edit tools.
+	 */
+	final public static function get_edit_tools() {
 		if ( null === static::$_edit_tools ) {
 			self::_init_edit_tools();
 		}
@@ -62,7 +119,27 @@ abstract class Element_Base {
 		return static::$_edit_tools;
 	}
 
-	public final static function add_edit_tool( $tool_name, $tool_data, $after = null ) {
+	/**
+	 * Add new edit tool.
+	 *
+	 * Register new edit tool for the element.
+	 *
+	 * @access public
+	 * @static
+	 *
+	 * @param string $tool_name Edit tool name.
+	 * @param array  $tool_data {
+	 *     Edit tool data.
+	 *
+	 *     @type string $title  Edit tool title.
+	 *     @type string $icon   Edit tool icon.
+	 * }
+	 * @param string $after     Optional. If tool ID defined, the new edit tool
+	 *                          will be added after it. If null, the new edit
+	 *                          tool will be added at the end. Default is null.
+	 *
+	 */
+	final public static function add_edit_tool( $tool_name, $tool_data, $after = null ) {
 		if ( null === static::$_edit_tools ) {
 			self::_init_edit_tools();
 		}
@@ -73,27 +150,56 @@ abstract class Element_Base {
 			$after_index = array_search( $after, array_keys( static::$_edit_tools ) ) + 1;
 
 			static::$_edit_tools = array_slice( static::$_edit_tools, 0, $after_index, true ) +
-			                       [ $tool_name => $tool_data ] +
-			                       array_slice( static::$_edit_tools, $after_index, null, true );
+								   [
+									   $tool_name => $tool_data,
+								   ] +
+								   array_slice( static::$_edit_tools, $after_index, null, true );
 		} else {
 			static::$_edit_tools[ $tool_name ] = $tool_data;
 		}
 	}
 
+	/**
+	 * Retrieve element type.
+	 *
+	 * @access public
+	 * @static
+	 *
+	 * @return string Control type.
+	 */
 	public static function get_type() {
 		return 'element';
 	}
 
+	/**
+	 * Retrieve default edit tools.
+	 *
+	 * Get the element default edit tools. Used to set initial tools.
+	 * By default the element has no edit tools.
+	 *
+	 * @access protected
+	 * @static
+	 *
+	 * @return array Default edit tools.
+	 */
 	protected static function get_default_edit_tools() {
 		return [];
 	}
 
 	/**
-	 * @param array $haystack
-	 * @param string $needle
+	 * Retrieve items.
 	 *
-	 * @return mixed the whole haystack or the
-	 * needle from the haystack when requested
+	 * Utility method that recieves an array with a needle and returns all the
+	 * items that match the needle. If needle is not defined the entire haystack
+	 * will be returened.
+	 *
+	 * @access private
+	 * @static
+	 *
+	 * @param array  $haystack An array of items.
+	 * @param string $needle   Optional. Default is null.
+	 *
+	 * @return mixed The whole haystack or the needle from the haystack when requested.
 	 */
 	private static function _get_items( array $haystack, $needle = null ) {
 		if ( $needle ) {
@@ -103,189 +209,90 @@ abstract class Element_Base {
 		return $haystack;
 	}
 
+	/**
+	 * Initialize edit tools.
+	 *
+	 * Register default edit tools.
+	 *
+	 * @access private
+	 * @static
+	 */
 	private static function _init_edit_tools() {
 		static::$_edit_tools = static::get_default_edit_tools();
 	}
 
 	/**
-	 * @param array $element_data
+	 * Retrieve the default child element type.
+	 *
+	 * @access protected
+	 * @abstract
+	 *
+	 * @param array $element_data Element data.
 	 *
 	 * @return Element_Base
 	 */
 	abstract protected function _get_default_child_type( array $element_data );
 
-	abstract public function get_name();
-
-	public function get_controls( $control_id = null ) {
-		$stack = Plugin::$instance->controls_manager->get_element_stack( $this );
-
-		if ( null === $stack ) {
-			$this->_init_controls();
-
-			return $this->get_controls();
-		}
-
-		return self::_get_items( $stack['controls'], $control_id );
-	}
-
-	public function get_active_controls() {
-		$controls = $this->get_controls();
-
-		$settings = $this->get_settings();
-
-		$active_controls = array_reduce( array_keys( $controls ), function ( $active_controls, $control_key ) use ( $controls, $settings ) {
-			$control = $controls[ $control_key ];
-
-			if ( $this->is_control_visible( $control, $settings ) ) {
-				$active_controls[ $control_key ] = $control;
-			}
-
-			return $active_controls;
-		}, [] );
-
-		return $active_controls;
-	}
-
-	public function add_control( $id, array $args, $overwrite = false ) {
-		if ( empty( $args['type'] ) || ! in_array( $args['type'], [ Controls_Manager::SECTION, Controls_Manager::WP_WIDGET ] ) ) {
-			if ( null !== $this->_current_section ) {
-				if ( ! empty( $args['section'] ) || ! empty( $args['tab'] ) ) {
-					_doing_it_wrong( __CLASS__ . '::' . __FUNCTION__, 'Cannot redeclare control with `tab` or `section` args inside section. - ' . $id, '1.0.0' );
-				}
-				$args = array_merge( $args, $this->_current_section );
-
-				if ( null !== $this->_current_tab ) {
-					$args = array_merge( $args, $this->_current_tab );
-				}
-			} elseif ( empty( $args['section'] ) ) {
-				wp_die( __CLASS__ . '::' . __FUNCTION__ . ': Cannot add a control outside a section (use `start_controls_section`).' );
-			}
-		}
-
-		return Plugin::$instance->controls_manager->add_control_to_stack( $this, $id, $args, $overwrite );
-	}
-
-	public function remove_control( $control_id ) {
-		return Plugin::$instance->controls_manager->remove_control_from_stack( $this->get_name(), $control_id );
-	}
-
-	public function update_control( $control_id, array $args ) {
-		return Plugin::$instance->controls_manager->update_control_in_stack( $this, $control_id, $args );
-	}
-
-	public final function add_group_control( $group_name, array $args = [] ) {
-		$group = Plugin::$instance->controls_manager->get_control_groups( $group_name );
-
-		if ( ! $group ) {
-			wp_die( __CLASS__ . '::' . __FUNCTION__ . ': Group `' . $group_name . '` not found.' );
-		}
-
-		$group->add_controls( $this, $args );
-	}
-
-	public final function get_tabs_controls() {
-		$stack = Plugin::$instance->controls_manager->get_element_stack( $this );
-
-		return $stack['tabs'];
-	}
-
-	public final function get_scheme_controls() {
-		$enabled_schemes = Schemes_Manager::get_enabled_schemes();
-
-		return array_filter( $this->get_controls(), function( $control ) use ( $enabled_schemes ) {
-			return ( ! empty( $control['scheme'] ) && in_array( $control['scheme']['type'], $enabled_schemes ) );
-		} );
-	}
-
-	public final function get_style_controls( $controls = null ) {
-		if ( null === $controls ) {
-			$controls = $this->get_active_controls();
-		}
-
-		$style_controls = [];
-
-		foreach ( $controls as $control_name => $control ) {
-			if ( Controls_Manager::REPEATER === $control['type'] ) {
-				$control['style_fields'] = $this->get_style_controls( $control['fields'] );
-			}
-
-			if ( ! empty( $control['style_fields'] ) || ! empty( $control['selectors'] ) ) {
-				$style_controls[ $control_name ] = $control;
-			}
-		}
-
-		return $style_controls;
-	}
-
-	public final function get_class_controls() {
-		return array_filter( $this->get_active_controls(), function( $control ) {
-			return ( isset( $control['prefix_class'] ) );
-		} );
-	}
-
-	public final function add_responsive_control( $id, array $args ) {
-		$devices = [
-			self::RESPONSIVE_DESKTOP,
-			self::RESPONSIVE_TABLET,
-			self::RESPONSIVE_MOBILE,
-		];
-
-		foreach ( $devices as $device_name ) {
-			$control_args = $args;
-
-			if ( ! empty( $args['prefix_class'] ) ) {
-				$device_to_replace = self::RESPONSIVE_DESKTOP === $device_name ? '' : '-' . $device_name;
-
-				$control_args['prefix_class'] = sprintf( $args['prefix_class'], $device_to_replace );
-			}
-
-			$control_args['responsive'] = [ 'max' => $device_name ];
-
-			if ( isset( $control_args[ $device_name . '_default' ] ) ) {
-				$control_args['default'] = $control_args[ $device_name . '_default' ];
-			}
-
-			unset( $control_args['desktop_default'] );
-			unset( $control_args['tablet_default'] );
-			unset( $control_args['mobile_default'] );
-
-			$id_suffix = self::RESPONSIVE_DESKTOP === $device_name ? '' : '_' . $device_name;
-
-			$this->add_control(
-				$id . $id_suffix,
-				$control_args
-			);
-		}
-	}
-
-	public final function get_class_name() {
-		return get_called_class();
-	}
-
+	/**
+	 * Before element rendering.
+	 *
+	 * Used to add stuff before the element.
+	 *
+	 * @access public
+	 */
 	public function before_render() {}
 
+	/**
+	 * After element rendering.
+	 *
+	 * Used to add stuff after the element.
+	 *
+	 * @access public
+	 */
 	public function after_render() {}
 
+	/**
+	 * Retrieve element title.
+	 *
+	 * @access public
+	 *
+	 * @return string Element title.
+	 */
 	public function get_title() {
 		return '';
 	}
 
+	/**
+	 * Retrieve element icon.
+	 *
+	 * @access public
+	 *
+	 * @return string Element icon.
+	 */
 	public function get_icon() {
 		return 'eicon-columns';
 	}
 
+	/**
+	 * Whether the reload preview is required.
+	 *
+	 * Used to determine whether the reload preview is required or not.
+	 *
+	 * @access public
+	 *
+	 * @return bool Whether the reload preview is required.
+	 */
 	public function is_reload_preview_required() {
 		return false;
 	}
 
-	public final function get_config() {
-		if ( null === $this->_config ) {
-			$this->_config = $this->_get_initial_config();
-		}
-
-		return $this->_config;
-	}
-
+	/**
+	 * Print element template.
+	 *
+	 * Used to generate the element template on the editor.
+	 *
+	 * @access public
+	 */
 	public function print_template() {
 		ob_start();
 
@@ -308,22 +315,15 @@ abstract class Element_Base {
 		<?php
 	}
 
-	public function get_id() {
-		return $this->_id;
-	}
-
-	public function get_data( $item = null ) {
-		return self::_get_items( $this->_data, $item );
-	}
-
-	public function get_settings( $setting = null ) {
-		return self::_get_items( $this->_settings, $setting );
-	}
-
-	public function get_active_settings() {
-		return array_intersect_key( $this->get_settings(), $this->get_active_controls() );
-	}
-
+	/**
+	 * Retrieve children elements.
+	 *
+	 * Get all the child elements of this this element.
+	 *
+	 * @access public
+	 *
+	 * @return Element_Base[] Child elements.
+	 */
 	public function get_children() {
 		if ( null === $this->_children ) {
 			$this->_init_children();
@@ -332,22 +332,46 @@ abstract class Element_Base {
 		return $this->_children;
 	}
 
+	/**
+	 * Retrieve default arguments.
+	 *
+	 * Get the element default arguments. Used to return all the default
+	 * arguments or a specific default argument, if one is set.
+	 *
+	 * @access public
+	 *
+	 * @param array $item Optional. Default is null.
+	 *
+	 * @return array Default argument(s).
+	 */
 	public function get_default_args( $item = null ) {
 		return self::_get_items( $this->_default_args, $item );
 	}
 
 	/**
-	 * @return Element_Base
+	 * Retrieve parent element.
+	 *
+	 * Get the element parent. Used to check which element it belongs to.
+	 *
+	 * @access public
+	 *
+	 * @deprecated
+	 *
+	 * @return Element_Base Parent element.
 	 */
 	public function get_parent() {
 		return $this->get_data( 'parent' );
 	}
 
 	/**
-	 * @param array $child_data
-	 * @param array $child_args
+	 * Add new child element.
 	 *
-	 * @return Element_Base|false
+	 * Register new child element to allow hierarchy.
+	 *
+	 * @param array $child_data Child element data.
+	 * @param array $child_args Child element arguments.
+	 *
+	 * @return Element_Base|false Child element instance, or false if failed.
 	 */
 	public function add_child( array $child_data, array $child_args = [] ) {
 		if ( null === $this->_children ) {
@@ -369,53 +393,27 @@ abstract class Element_Base {
 		return $child;
 	}
 
-	public function is_control_visible( $control, $values = null ) {
-		if ( null === $values ) {
-			$values = $this->get_settings();
-		}
-
-		// Repeater fields
-		if ( ! empty( $control['conditions'] ) ) {
-			return Conditions::check( $control['conditions'], $values );
-		}
-
-		if ( empty( $control['condition'] ) ) {
-			return true;
-		}
-
-		foreach ( $control['condition'] as $condition_key => $condition_value ) {
-			preg_match( '/([a-z_0-9]+)(?:\[([a-z_]+)])?(!?)$/i', $condition_key, $condition_key_parts );
-
-			$pure_condition_key = $condition_key_parts[1];
-			$condition_sub_key = $condition_key_parts[2];
-			$is_negative_condition = ! ! $condition_key_parts[3];
-
-			$instance_value = $values[ $pure_condition_key ];
-
-			if ( null === $instance_value ) {
-				return false;
-			}
-
-			if ( $condition_sub_key ) {
-				if ( ! isset( $instance_value[ $condition_sub_key ] ) ) {
-					return false;
-				}
-
-				$instance_value = $instance_value[ $condition_sub_key ];
-			}
-
-			// If it's a non empty array - check if the conditionValue contains the controlValue,
-			// otherwise check if they are equal. ( and give the ability to check if the value is an empty array )
-			$is_contains = ( is_array( $condition_value ) && ! empty( $condition_value ) ) ? in_array( $instance_value, $condition_value ) : $instance_value === $condition_value;
-
-			if ( $is_negative_condition && $is_contains || ! $is_negative_condition && ! $is_contains ) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
+	/**
+	 * Add render attribute.
+	 *
+	 * Used to add render attribute to specific HTML elements.
+	 *
+	 * Example usage:
+	 *
+	 * `$this->add_render_attribute( 'wrapper', 'class', 'custom-widget-wrapper-class' );`
+	 * `$this->add_render_attribute( 'widget', 'id', 'custom-widget-id' );
+	 * `$this->add_render_attribute( 'button', [ 'class' => 'custom-button-class', 'id' => 'custom-button-id' ] );
+	 *
+	 * @access public
+	 *
+	 * @param array|string $element   The HTML element.
+	 * @param array|string $key       Optional. Attribute key. Dafault is null.
+	 * @param array|string $value     Optional. Attribute value. Dafault is null.
+	 * @param bool         $overwrite Optional. Whether to overwrite existing
+	 *                                attribute. Default is false, not to overwrite.
+	 *
+	 * @return Element_Base Current instance of the element.
+	 */
 	public function add_render_attribute( $element, $key = null, $value = null, $overwrite = false ) {
 		if ( is_array( $element ) ) {
 			foreach ( $element as $element_key => $attributes ) {
@@ -448,10 +446,36 @@ abstract class Element_Base {
 		return $this;
 	}
 
+	/**
+	 * Set render attribute.
+	 *
+	 * Used to set the value of the HTML element render attribute or to update
+	 * an existing render attribute.
+	 *
+	 * @access public
+	 *
+	 * @param array|string $element The HTML element.
+	 * @param array|string $key     Optional. Attribute key. Dafault is null.
+	 * @param array|string $value   Optional. Attribute value. Dafault is null.
+	 *
+	 * @return Element_Base Current instance of the element.
+	 */
 	public function set_render_attribute( $element, $key = null, $value = null ) {
 		return $this->add_render_attribute( $element, $key, $value, true );
 	}
 
+	/**
+	 * Retrieve render attribute string.
+	 *
+	 * Used to get the value of the render attribute.
+	 *
+	 * @access public
+	 *
+	 * @param array|string $element The element.
+	 *
+	 * @return string Render attribute string, or an empty string if the attribute
+	 *                is empty or not exist.
+	 */
 	public function get_render_attribute_string( $element ) {
 		if ( empty( $this->_render_attributes[ $element ] ) ) {
 			return '';
@@ -468,8 +492,17 @@ abstract class Element_Base {
 		return implode( ' ', $attributes );
 	}
 
+	/**
+	 * Print element.
+	 *
+	 * Used to generate the element final HTML on the frontend and the editor.
+ 	 *
+	 * @access public
+	 */
 	public function print_element() {
-		$this->enqueue_scripts();
+		if ( ! Plugin::$instance->editor->is_edit_mode() ) {
+			$this->enqueue_scripts();
+		}
 
 		do_action( 'elementor/frontend/' . static::get_type() . '/before_render', $this );
 
@@ -484,6 +517,23 @@ abstract class Element_Base {
 		do_action( 'elementor/frontend/' . static::get_type() . '/after_render', $this );
 	}
 
+	/**
+	 * Retrieve the element raw data.
+	 *
+	 * Get the raw element data, including the id, type, settings, child
+	 * elements and whether it is an inner element.
+	 *
+	 * The data with the HTML used always to display the data, but the Elementor
+	 * editor uses the raw data without the HTML in order not to render the data
+	 * again.
+ 	 *
+	 * @access public
+	 *
+	 * @param bool $with_html_content Optional. Whether to return the data with
+	 *                                HTML content or without. Used for caching. Default is false, without HTML.
+	 *
+	 * @return array Element raw data.
+	 */
 	public function get_raw_data( $with_html_content = false ) {
 		$data = $this->get_data();
 
@@ -494,7 +544,7 @@ abstract class Element_Base {
 		}
 
 		return [
-			'id' => $this->_id,
+			'id' => $this->get_id(),
 			'elType' => $data['elType'],
 			'settings' => $data['settings'],
 			'elements' => $elements,
@@ -502,161 +552,84 @@ abstract class Element_Base {
 		];
 	}
 
+	/**
+	 * Retrieve unique selector.
+	 *
+	 * Get the unique selector of the element. Used to set a unique HTML class
+	 * for each HTML element. This way Elementor can set custom styles for each
+	 * element.
+	 *
+	 * @access public
+	 *
+	 * @return string Unique selector.
+	 */
 	public function get_unique_selector() {
 		return '.elementor-element-' . $this->get_id();
 	}
 
-	public function start_controls_section( $section_id, array $args ) {
-		do_action( 'elementor/element/before_section_start', $this, $section_id, $args );
-		do_action( 'elementor/element/' . $this->get_name() . '/' . $section_id . '/before_section_start', $this, $args );
-
-		$args['type'] = Controls_Manager::SECTION;
-
-		$this->add_control( $section_id, $args );
-
-		if ( null !== $this->_current_section ) {
-			wp_die( sprintf( 'Elementor: You can\'t start a section before the end of the previous section: `%s`', $this->_current_section['section'] ) );
-		}
-
-		$this->_current_section = [
-			'section' => $section_id,
-			'tab' => $this->get_controls( $section_id )['tab'],
-		];
-
-		do_action( 'elementor/element/after_section_start', $this, $section_id, $args );
-		do_action( 'elementor/element/' . $this->get_name() . '/' . $section_id . '/after_section_start', $this, $args );
-	}
-
-	public function end_controls_section() {
-		// Save the current section for the action
-		$current_section = $this->_current_section;
-		$section_id = $current_section['section'];
-		$args = [ 'tab' => $current_section['tab'] ];
-
-		do_action( 'elementor/element/before_section_end', $this, $section_id, $args );
-		do_action( 'elementor/element/' . $this->get_name() . '/' . $section_id . '/before_section_end', $this, $args );
-
-		$this->_current_section = null;
-
-		do_action( 'elementor/element/after_section_end', $this, $section_id, $args );
-		do_action( 'elementor/element/' . $this->get_name() . '/' . $section_id . '/after_section_end', $this, $args );
-	}
-
-	public function start_controls_tabs( $tabs_id ) {
-		if ( null !== $this->_current_tab ) {
-			wp_die( sprintf( 'Elementor: You can\'t start tabs before the end of the previous tabs: `%s`', $this->_current_tab['tabs_wrapper'] ) );
-		}
-
-		$this->add_control(
-			$tabs_id,
-			[
-				'type' => Controls_Manager::TABS,
-			]
-		);
-
-		$this->_current_tab = [
-			'tabs_wrapper' => $tabs_id,
-		];
-	}
-
-	public function end_controls_tabs() {
-		$this->_current_tab = null;
-	}
-
-	public function start_controls_tab( $tab_id, $args ) {
-		if ( ! empty( $this->_current_tab['inner_tab'] ) ) {
-			wp_die( sprintf( 'Elementor: You can\'t start a tab before the end of the previous tab: `%s`', $this->_current_tab['inner_tab'] ) );
-		}
-
-		$args['type'] = Controls_Manager::TAB;
-		$args['tabs_wrapper'] = $this->_current_tab['tabs_wrapper'];
-
-		$this->add_control( $tab_id, $args );
-
-		$this->_current_tab['inner_tab'] = $tab_id;
-	}
-
-	public function end_controls_tab() {
-		unset( $this->_current_tab['inner_tab'] );
-	}
-
-	public final function set_settings( $key, $value = null ) {
-		if ( null === $value ) {
-			$this->_settings = $key;
-		} else {
-			$this->_settings[ $key ] = $value;
-		}
-	}
-
-	protected function _register_controls() {}
-
+	/**
+	 * Render element output in the editor.
+	 *
+	 * Used to generate the live preview, using a Backbone JavaScript template.
+	 *
+	 * @access protected
+	 */
 	protected function _content_template() {}
 
-	protected function _render_settings() {
-		?>
-		<div class="elementor-element-overlay">
-			<div class="elementor-editor-element-settings elementor-editor-<?php echo esc_attr( $this->get_type() ); ?>-settings elementor-editor-<?php echo esc_attr( $this->get_name() ); ?>-settings">
-				<ul class="elementor-editor-element-settings-list">
-					<li class="elementor-editor-element-setting elementor-editor-element-add">
-						<a href="#" title="<?php _e( 'Add Widget', 'elementor' ); ?>">
-							<span class="elementor-screen-only"><?php _e( 'Add', 'elementor' ); ?></span>
-							<i class="fa fa-plus"></i>
-						</a>
-					</li>
-					<?php /* Temp removing for better UI
-					<li class="elementor-editor-element-setting elementor-editor-element-edit">
-						<a href="#" title="<?php _e( 'Edit Widget', 'elementor' ); ?>">
-							<span class="elementor-screen-only"><?php _e( 'Edit', 'elementor' ); ?></span>
-							<i class="fa fa-pencil"></i>
-						</a>
-					</li>
-					*/ ?>
-					<li class="elementor-editor-element-setting elementor-editor-element-duplicate">
-						<a href="#" title="<?php _e( 'Duplicate Widget', 'elementor' ); ?>">
-							<span class="elementor-screen-only"><?php _e( 'Duplicate', 'elementor' ); ?></span>
-							<i class="fa fa-files-o"></i>
-						</a>
-					</li>
-					<li class="elementor-editor-element-setting elementor-editor-element-remove">
-						<a href="#" title="<?php _e( 'Remove Widget', 'elementor' ); ?>">
-							<span class="elementor-screen-only"><?php _e( 'Remove', 'elementor' ); ?></span>
-							<i class="fa fa-trash-o"></i>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<?php
-	}
+	/**
+	 * Render element settings.
+	 *
+	 * Used to generate the final HTML.
+	 *
+	 * @access protected
+	 */
+	protected function _render_settings() {}
 
 	/**
-	 * @return boolean
+	 * Is type instance.
+	 *
+	 * Used to determine whether the element is an instance of that type or not.
+	 *
+	 * @access public
+	 *
+	 * @return bool Whether the element is an instance of that type.
 	 */
 	public function is_type_instance() {
 		return $this->_is_type_instance;
 	}
 
-	public function get_frontend_settings_keys() {
-		return [];
-	}
-
+	/**
+	 * Add render attributes.
+	 *
+	 * Used to add render attributes to the element.
+	 *
+	 * @access protected
+	 */
 	protected function _add_render_attributes() {
 		$id = $this->get_id();
 
 		$this->add_render_attribute( '_wrapper', 'data-id', $id );
 
-		$this->add_render_attribute( '_wrapper', 'class', [
-			'elementor-element',
-			'elementor-element-' . $id,
-		] );
+		$this->add_render_attribute(
+			'_wrapper', 'class', [
+				'elementor-element',
+				'elementor-element-' . $id,
+			]
+		);
 
 		$settings = $this->get_active_settings();
 
 		foreach ( self::get_class_controls() as $control ) {
-			if ( empty( $settings[ $control['name'] ] ) )
+			if ( empty( $settings[ $control['name'] ] ) ) {
 				continue;
+			}
 
 			$this->add_render_attribute( '_wrapper', 'class', $control['prefix_class'] . $settings[ $control['name'] ] );
+		}
+
+		if ( ! empty( $settings['animation'] ) || ! empty( $settings['_animation'] ) ) {
+			// Hide the element until the animation begins
+			$this->add_render_attribute( '_wrapper', 'class', 'elementor-invisible' );
 		}
 
 		if ( ! empty( $settings['_element_id'] ) ) {
@@ -664,53 +637,90 @@ abstract class Element_Base {
 		}
 
 		if ( ! Plugin::$instance->editor->is_edit_mode() ) {
-			$frontend_settings = array_intersect_key( $settings, array_flip( $this->get_frontend_settings_keys() ) );
+			$frontend_settings = $this->get_frontend_settings();
 
-			$this->add_render_attribute( '_wrapper', 'data-settings', wp_json_encode( $frontend_settings ) );
+			if ( $frontend_settings ) {
+				$this->add_render_attribute( '_wrapper', 'data-settings', wp_json_encode( $frontend_settings ) );
+			}
 		}
 	}
 
+	/**
+	 * Render element.
+	 *
+	 * Generates the final HTML on the frontend.
+	 *
+	 * @access protected
+	 */
 	protected function render() {}
 
+	/**
+	 * Retrieve default data.
+	 *
+	 * Get the default element data. Used to reset the data on initialization.
+	 *
+	 * @access protected
+	 *
+	 * @return array Default data.
+	 */
 	protected function get_default_data() {
-		return [
-			'id' => 0,
-			'settings' => [],
-			'elements' => [],
-			'isInner' => false,
-		];
+		$data = parent::get_default_data();
+
+		return array_merge(
+			$data, [
+				'elements' => [],
+				'isInner' => false,
+			]
+		);
 	}
 
-	protected function _get_parsed_settings() {
-		$settings = $this->_data['settings'];
-
-		foreach ( $this->get_controls() as $control ) {
-			$control_obj = Plugin::$instance->controls_manager->get_control( $control['type'] );
-
-			$settings[ $control['name'] ] = $control_obj->get_value( $control, $settings );
-		}
-
-		return $settings;
-	}
-
+	/**
+	 * Print element content.
+	 *
+	 * Output the element final HTML on the frontend.
+	 *
+	 * @access protected
+	 */
 	protected function _print_content() {
 		foreach ( $this->get_children() as $child ) {
 			$child->print_element();
 		}
 	}
 
+	/**
+	 * Retrieve initial config.
+	 *
+	 * Get the element initial configuration.
+	 *
+	 * @access protected
+	 *
+	 * @return array The initial config.
+	 */
 	protected function _get_initial_config() {
-		return [
-			'name' => $this->get_name(),
-			'elType' => $this->get_type(),
-			'title' => $this->get_title(),
-			'controls' => $this->get_controls(),
-			'tabs_controls' => $this->get_tabs_controls(),
-			'icon' => $this->get_icon(),
-			'reload_preview' => $this->is_reload_preview_required(),
-		];
+		$config = parent::_get_initial_config();
+
+		return array_merge(
+			$config, [
+				'name' => $this->get_name(),
+				'elType' => $this->get_type(),
+				'title' => $this->get_title(),
+				'icon' => $this->get_icon(),
+				'reload_preview' => $this->is_reload_preview_required(),
+			]
+		);
 	}
 
+	/**
+	 * Retrieve child type.
+	 *
+	 * Get the element child type based on element data.
+	 *
+	 * @access private
+	 *
+	 * @param array $element_data Element ID.
+	 *
+	 * @return Element_Base|false Child type or false if type not found.
+	 */
 	private function _get_child_type( $element_data ) {
 		$child_type = $this->_get_default_child_type( $element_data );
 
@@ -722,12 +732,13 @@ abstract class Element_Base {
 		return apply_filters( 'elementor/element/get_child_type', $child_type, $element_data, $this );
 	}
 
-	private function _init_controls() {
-		Plugin::$instance->controls_manager->open_stack( $this );
-
-		$this->_register_controls();
-	}
-
+	/**
+	 * Initialize children.
+	 *
+	 * Initializing the element child elements.
+	 *
+	 * @access private
+	 */
 	private function _init_children() {
 		$this->_children = [];
 
@@ -746,16 +757,20 @@ abstract class Element_Base {
 		}
 	}
 
-	private function _init( $data ) {
-		$this->_data = array_merge( $this->get_default_data(), $data );
-		$this->_id = $data['id'];
-		$this->_settings = $this->_get_parsed_settings();
-	}
-
+	/**
+	 * Element base constructor.
+	 *
+	 * Initializing the element base class using `$data` and `$args`. The
+	 * `$data` is required for a normal instance.
+	 *
+	 * @param array      $data Element data. Default is an empty array.
+	 * @param array|null $args Optional. Element arguments. Default is null.
+	 **/
 	public function __construct( array $data = [], array $args = null ) {
+		parent::__construct( $data );
+
 		if ( $data ) {
-		    $this->_is_type_instance = false;
-			$this->_init( $data );
+			$this->_is_type_instance = false;
 		} elseif ( $args ) {
 			$this->_default_args = $args;
 		}

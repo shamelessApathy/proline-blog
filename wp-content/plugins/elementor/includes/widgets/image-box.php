@@ -1,26 +1,68 @@
 <?php
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
+/**
+ * Image Box Widget
+ */
 class Widget_Image_Box extends Widget_Base {
 
+	/**
+	 * Retrieve image box widget name.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'image-box';
 	}
 
+	/**
+	 * Retrieve image box widget title.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Image Box', 'elementor' );
 	}
 
+	/**
+	 * Retrieve image box widget icon.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-image-box';
 	}
 
+	/**
+	 * Retrieve the list of categories the image box widget belongs to.
+	 *
+	 * Used to determine where to display the widget in the editor.
+	 *
+	 * @access public
+	 *
+	 * @return array Widget categories.
+	 */
 	public function get_categories() {
 		return [ 'general-elements' ];
 	}
 
+	/**
+	 * Register image box widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_image',
@@ -139,7 +181,7 @@ class Widget_Image_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'image_space',
 			[
 				'label' => __( 'Image Spacing', 'elementor' ),
@@ -161,13 +203,19 @@ class Widget_Image_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'image_size',
 			[
 				'label' => __( 'Image Size', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 30,
+					'unit' => '%',
+				],
+				'tablet_default' => [
+					'unit' => '%',
+				],
+				'mobile_default' => [
 					'unit' => '%',
 				],
 				'size_units' => [ '%' ],
@@ -354,6 +402,13 @@ class Widget_Image_Box extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render image box widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -373,11 +428,17 @@ class Widget_Image_Box extends Widget_Base {
 			$image_html = '<img ' . $this->get_render_attribute_string( 'image' ) . '>';
 
 			if ( ! empty( $settings['link']['url'] ) ) {
-				$target = '';
-				if ( ! empty( $settings['link']['is_external'] ) ) {
-					$target = ' target="_blank"';
+				$this->add_render_attribute( 'link', 'href', $settings['link']['url'] );
+
+				if ( $settings['link']['is_external'] ) {
+					$this->add_render_attribute( 'link', 'target', '_blank' );
 				}
-				$image_html = sprintf( '<a href="%s"%s>%s</a>', $settings['link']['url'], $target, $image_html );
+
+				if ( ! empty( $settings['link']['nofollow'] ) ) {
+					$this->add_render_attribute( 'link', 'rel', 'nofollow' );
+				}
+
+				$image_html = '<a ' . $this->get_render_attribute_string( 'link' ) . '>' . $image_html . '</a>';
 			}
 
 			$html .= '<figure class="elementor-image-box-img">' . $image_html . '</figure>';
@@ -390,13 +451,7 @@ class Widget_Image_Box extends Widget_Base {
 				$title_html = $settings['title_text'];
 
 				if ( ! empty( $settings['link']['url'] ) ) {
-					$target = '';
-
-					if ( ! empty( $settings['link']['is_external'] ) ) {
-						$target = ' target="_blank"';
-					}
-
-					$title_html = sprintf( '<a href="%s"%s>%s</a>', $settings['link']['url'], $target, $title_html );
+					$title_html = '<a ' . $this->get_render_attribute_string( 'link' ) . '>' . $title_html . '</a>';
 				}
 
 				$html .= sprintf( '<%1$s class="elementor-image-box-title">%2$s</%1$s>', $settings['title_size'], $title_html );
@@ -414,6 +469,13 @@ class Widget_Image_Box extends Widget_Base {
 		echo $html;
 	}
 
+	/**
+	 * Render image box widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @access protected
+	 */
 	protected function _content_template() {
 		?>
 		<#

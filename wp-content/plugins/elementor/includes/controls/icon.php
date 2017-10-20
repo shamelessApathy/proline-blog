@@ -1,19 +1,21 @@
 <?php
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * A Font Icon select box.
  *
- * @property array $icons   A list of font-icon classes. [ 'class-name' => 'nicename', ... ]
+ * @property array $options A list of font-icon classes. [ 'class-name' => 'nicename', ... ]
  *                          Default Font Awesome icons. @see Control_Icon::get_icons().
  * @property array $include list of classes to include form the $icons property
  * @property array $exclude list of classes to exclude form the $icons property
  *
  * @since 1.0.0
  */
-class Control_Icon extends Control_Base {
+class Control_Icon extends Base_Data_Control {
 
 	public function get_type() {
 		return 'icon';
@@ -814,18 +816,19 @@ class Control_Icon extends Control_Base {
 
 	protected function get_default_settings() {
 		return [
-			'icons' => self::get_icons(),
+			'options' => self::get_icons(),
 		];
 	}
 
 	public function content_template() {
+		$control_uid = $this->get_control_uid();
 		?>
 		<div class="elementor-control-field">
-			<label class="elementor-control-title">{{{ data.label }}}</label>
+			<label for="<?php echo $control_uid; ?>" class="elementor-control-title">{{{ data.label }}}</label>
 			<div class="elementor-control-input-wrapper">
-				<select class="elementor-control-icon" data-setting="{{ data.name }}" data-placeholder="<?php _e( 'Select Icon', 'elementor' ); ?>">
+				<select id="<?php echo $control_uid; ?>" class="elementor-control-icon" data-setting="{{ data.name }}" data-placeholder="<?php _e( 'Select Icon', 'elementor' ); ?>">
 					<option value=""><?php _e( 'Select Icon', 'elementor' ); ?></option>
-					<# _.each( data.icons, function( option_title, option_value ) { #>
+					<# _.each( data.options, function( option_title, option_value ) { #>
 					<option value="{{ option_value }}">{{{ option_title }}}</option>
 					<# } ); #>
 				</select>

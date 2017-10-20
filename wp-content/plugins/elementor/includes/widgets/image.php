@@ -1,22 +1,55 @@
 <?php
 namespace Elementor;
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
+/**
+ * Image Widget
+ */
 class Widget_Image extends Widget_Base {
 
+	/**
+	 * Retrieve image widget name.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget name.
+	 */
 	public function get_name() {
 		return 'image';
 	}
 
+	/**
+	 * Retrieve image widget title.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget title.
+	 */
 	public function get_title() {
 		return __( 'Image', 'elementor' );
 	}
 
+	/**
+	 * Retrieve image widget icon.
+	 *
+	 * @access public
+	 *
+	 * @return string Widget icon.
+	 */
 	public function get_icon() {
 		return 'eicon-insert-image';
 	}
 
+	/**
+	 * Register image widget controls.
+	 *
+	 * Adds different input fields to allow the user to change and customize the widget settings.
+	 *
+	 * @access protected
+	 */
 	protected function _register_controls() {
 		$this->start_controls_section(
 			'section_image',
@@ -39,7 +72,7 @@ class Widget_Image extends Widget_Base {
 		$this->add_group_control(
 			Group_Control_Image_Size::get_type(),
 			[
-				'name' => 'image', // Actually its `image_size`
+				'name' => 'image', // Actually its `image_size`.
 				'label' => __( 'Image Size', 'elementor' ),
 				'default' => 'large',
 			]
@@ -110,6 +143,23 @@ class Widget_Image extends Widget_Base {
 		);
 
 		$this->add_control(
+			'open_lightbox',
+			[
+				'label' => __( 'Lightbox', 'elementor' ),
+				'type' => Controls_Manager::SELECT,
+				'default' => 'default',
+				'options' => [
+					'default' => __( 'Default', 'elementor' ),
+					'yes' => __( 'Yes', 'elementor' ),
+					'no' => __( 'No', 'elementor' ),
+				],
+				'condition' => [
+					'link_to' => 'file',
+				],
+			]
+		);
+
+		$this->add_control(
 			'view',
 			[
 				'label' => __( 'View', 'elementor' ),
@@ -128,13 +178,19 @@ class Widget_Image extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'space',
 			[
 				'label' => __( 'Size (%)', 'elementor' ),
 				'type' => Controls_Manager::SLIDER,
 				'default' => [
 					'size' => 100,
+					'unit' => '%',
+				],
+				'tablet_default' => [
+					'unit' => '%',
+				],
+				'mobile_default' => [
 					'unit' => '%',
 				],
 				'size_units' => [ '%' ],
@@ -185,10 +241,11 @@ class Widget_Image extends Widget_Base {
 				'name' => 'image_border',
 				'label' => __( 'Image Border', 'elementor' ),
 				'selector' => '{{WRAPPER}} .elementor-image img',
+				'separator' => 'before',
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'image_border_radius',
 			[
 				'label' => __( 'Border Radius', 'elementor' ),
@@ -204,6 +261,9 @@ class Widget_Image extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'image_box_shadow',
+				'exclude' => [
+					'box_shadow_position',
+				],
 				'selector' => '{{WRAPPER}} .elementor-image img',
 			]
 		);
@@ -276,6 +336,13 @@ class Widget_Image extends Widget_Base {
 		$this->end_controls_section();
 	}
 
+	/**
+	 * Render image widget output on the frontend.
+	 *
+	 * Written in PHP and used to generate the final HTML.
+	 *
+	 * @access protected
+	 */
 	protected function render() {
 		$settings = $this->get_settings();
 
@@ -294,39 +361,61 @@ class Widget_Image extends Widget_Base {
 		$link = $this->get_link_url( $settings );
 
 		if ( $link ) {
-			$this->add_render_attribute( 'link', 'href', $link['url'] );
+			$this->add_render_attribute( 'link', [
+				'href' => $link['url'],
+				'class' => 'elementor-clickable',
+				'data-elementor-open-lightbox' => $settings['open_lightbox'],
+			] );
 
 			if ( ! empty( $link['is_external'] ) ) {
 				$this->add_render_attribute( 'link', 'target', '_blank' );
 			}
+
+			if ( ! empty( $link['nofollow'] ) ) {
+				$this->add_render_attribute( 'link', 'rel', 'nofollow' );
+			}
 		} ?>
 		<div <?php echo $this->get_render_attribute_string( 'wrapper' ); ?>>
-		<?php
-		if ( $has_caption ) : ?>
+		<?php if ( $has_caption ) : ?>
 			<figure class="wp-caption">
-		<?php endif;
+		<?php
+		endif;
 
-		if ( $link ) : ?>
+		if ( $link ) :
+		?>
 				<a <?php echo $this->get_render_attribute_string( 'link' ); ?>>
-		<?php endif;
+		<?php
+		endif;
 
 		echo Group_Control_Image_Size::get_attachment_image_html( $settings );
 
-		if ( $link ) : ?>
+		if ( $link ) :
+		?>
 				</a>
-		<?php endif;
+		<?php
+		endif;
 
-		if ( $has_caption ) : ?>
+		if ( $has_caption ) :
+		?>
 				<figcaption class="widget-image-caption wp-caption-text"><?php echo $settings['caption']; ?></figcaption>
-		<?php endif;
+		<?php
+		endif;
 
-		if ( $has_caption ) : ?>
+		if ( $has_caption ) :
+		?>
 			</figure>
 		<?php endif; ?>
 		</div>
 		<?php
 	}
 
+	/**
+	 * Render image widget output in the editor.
+	 *
+	 * Written as a Backbone JavaScript template and used to generate the live preview.
+	 *
+	 * @access protected
+	 */
 	protected function _content_template() {
 		?>
 		<# if ( '' !== settings.image.url ) {
@@ -367,7 +456,7 @@ class Widget_Image extends Widget_Base {
 			}
 
 			if ( link_url ) {
-					#><a href="{{ link_url }}"><#
+					#><a class="elementor-clickable" data-elementor-open-lightbox="{{ settings.open_lightbox }}" href="{{ link_url }}"><#
 			}
 						#><img src="{{ image_url }}" class="{{ imgClass }}" /><#
 
@@ -388,6 +477,15 @@ class Widget_Image extends Widget_Base {
 		<?php
 	}
 
+	/**
+	 * Retrieve image widget link URL.
+	 *
+	 * @access private
+	 *
+	 * @param object $instance
+	 *
+	 * @return array|string|false An array/string containing the link URL, or false if no link.
+	 */
 	private function get_link_url( $instance ) {
 		if ( 'none' === $instance['link_to'] ) {
 			return false;
