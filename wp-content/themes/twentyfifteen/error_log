@@ -1,0 +1,2 @@
+[07-Dec-2017 21:18:00 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/prolinerangehood/public_html/blog/wp-content/themes/twentyfifteen/404.php on line 10
+[07-Dec-2017 23:26:02 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/prolinerangehood/public_html/blog/wp-content/themes/twentyfifteen/404.php on line 10

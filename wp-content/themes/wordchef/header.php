@@ -22,9 +22,19 @@ global $wordchef; ?>
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PLZBRT');</script>
     <!-- End Google Tag Manager -->
+
+<!--Autopilot Tracking -->
+<script type="text/javascript">(function(o){var b="https://api.autopilothq.com/anywhere/",t="be86034d3bb44e17afd76f1f2d14ff719d9670f3c3c940d88913de3dbc96fd96",a=window.AutopilotAnywhere={_runQueue:[],run:function(){this._runQueue.push(arguments);}},c=encodeURIComponent,s="SCRIPT",d=document,l=d.getElementsByTagName(s)[0],p="t="+c(d.title||"")+"&u="+c(d.location.href||"")+"&r="+c(d.referrer||""),j="text/javascript",z,y;if(!window.Autopilot) window.Autopilot=a;if(o.app) p="devmode=true&"+p;z=function(src,asy){var e=d.createElement(s);e.src=src;e.type=j;e.async=asy;l.parentNode.insertBefore(e,l);};y=function(){z(b+t+'?'+p,true);};if(window.attachEvent){window.attachEvent("onload",y);}else{window.addEventListener("load",y,false);}})({});</script>
+<!--End of Autopilot Tracking -->
+
 </head>
 
 <body <?php body_class(); ?>>
+<script>
+  fbq('track', 'ViewContent');
+</script>
+
+
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLZBRT"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

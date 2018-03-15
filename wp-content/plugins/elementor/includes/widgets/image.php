@@ -6,13 +6,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Image Widget
+ * Elementor image widget.
+ *
+ * Elementor widget that displays an image into the page.
+ *
+ * @since 1.0.0
  */
 class Widget_Image extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve image widget name.
 	 *
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @return string Widget name.
@@ -22,8 +29,11 @@ class Widget_Image extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve image widget title.
 	 *
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @return string Widget title.
@@ -33,8 +43,11 @@ class Widget_Image extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve image widget icon.
 	 *
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @return string Widget icon.
@@ -48,6 +61,7 @@ class Widget_Image extends Widget_Base {
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
+	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function _register_controls() {
@@ -73,7 +87,6 @@ class Widget_Image extends Widget_Base {
 			Group_Control_Image_Size::get_type(),
 			[
 				'name' => 'image', // Actually its `image_size`.
-				'label' => __( 'Image Size', 'elementor' ),
 				'default' => 'large',
 			]
 		);
@@ -110,8 +123,7 @@ class Widget_Image extends Widget_Base {
 				'label' => __( 'Caption', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => '',
-				'placeholder' => __( 'Enter your caption about the image', 'elementor' ),
-				'title' => __( 'Input image caption here', 'elementor' ),
+				'placeholder' => __( 'Enter your image caption', 'elementor' ),
 			]
 		);
 
@@ -134,7 +146,7 @@ class Widget_Image extends Widget_Base {
 			[
 				'label' => __( 'Link to', 'elementor' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => __( 'http://your-link.com', 'elementor' ),
+				'placeholder' => __( 'https://your-link.com', 'elementor' ),
 				'condition' => [
 					'link_to' => 'custom',
 				],
@@ -239,7 +251,6 @@ class Widget_Image extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'image_border',
-				'label' => __( 'Image Border', 'elementor' ),
 				'selector' => '{{WRAPPER}} .elementor-image img',
 				'separator' => 'before',
 			]
@@ -341,6 +352,7 @@ class Widget_Image extends Widget_Base {
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
+	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function render() {
@@ -414,6 +426,7 @@ class Widget_Image extends Widget_Base {
 	 *
 	 * Written as a Backbone JavaScript template and used to generate the live preview.
 	 *
+	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function _content_template() {
@@ -424,7 +437,7 @@ class Widget_Image extends Widget_Base {
 				url: settings.image.url,
 				size: settings.image_size,
 				dimension: settings.image_custom_dimension,
-				model: editModel
+				model: view.getEditModel()
 			};
 
 			var image_url = elementor.imagesManager.getImageUrl( image );
@@ -480,26 +493,27 @@ class Widget_Image extends Widget_Base {
 	/**
 	 * Retrieve image widget link URL.
 	 *
+	 * @since 1.0.0
 	 * @access private
 	 *
-	 * @param object $instance
+	 * @param array $settings
 	 *
 	 * @return array|string|false An array/string containing the link URL, or false if no link.
 	 */
-	private function get_link_url( $instance ) {
-		if ( 'none' === $instance['link_to'] ) {
+	private function get_link_url( $settings ) {
+		if ( 'none' === $settings['link_to'] ) {
 			return false;
 		}
 
-		if ( 'custom' === $instance['link_to'] ) {
-			if ( empty( $instance['link']['url'] ) ) {
+		if ( 'custom' === $settings['link_to'] ) {
+			if ( empty( $settings['link']['url'] ) ) {
 				return false;
 			}
-			return $instance['link'];
+			return $settings['link'];
 		}
 
 		return [
-			'url' => $instance['image']['url'],
+			'url' => $settings['image']['url'],
 		];
 	}
 }

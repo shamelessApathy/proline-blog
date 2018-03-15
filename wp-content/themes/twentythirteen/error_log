@@ -1,0 +1,6 @@
+[12-Feb-2018 21:40:12 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/prolinerangehood/public_html/blog/wp-content/themes/twentythirteen/404.php on line 10
+[12-Feb-2018 21:41:40 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/prolinerangehood/public_html/blog/wp-content/themes/twentythirteen/404.php on line 10
+[12-Feb-2018 21:42:48 UTC] PHP Fatal error:  Call to undefined function _e() in /home/prolinerangehood/public_html/blog/wp-content/themes/twentythirteen/404.php on line 16
+[12-Feb-2018 21:43:11 UTC] PHP Fatal error:  Call to undefined function _e() in /home/prolinerangehood/public_html/blog/wp-content/themes/twentythirteen/404.php on line 16
+[12-Feb-2018 21:43:35 UTC] PHP Warning:  phpinfo() has been disabled for security reasons in /home/prolinerangehood/public_html/blog/wp-content/themes/twentythirteen/404.php on line 9
+[12-Feb-2018 21:43:35 UTC] PHP Fatal error:  Call to undefined function _e() in /home/prolinerangehood/public_html/blog/wp-content/themes/twentythirteen/404.php on line 16

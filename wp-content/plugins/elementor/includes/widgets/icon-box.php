@@ -6,13 +6,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Icon Box Widget
+ * Elementor icon box widget.
+ *
+ * Elementor widget that displays an icon, a headline and a text.
+ *
+ * @since 1.0.0
  */
 class Widget_Icon_Box extends Widget_Base {
 
 	/**
+	 * Get widget name.
+	 *
 	 * Retrieve icon box widget name.
 	 *
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @return string Widget name.
@@ -22,8 +29,11 @@ class Widget_Icon_Box extends Widget_Base {
 	}
 
 	/**
+	 * Get widget title.
+	 *
 	 * Retrieve icon box widget title.
 	 *
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @return string Widget title.
@@ -33,8 +43,11 @@ class Widget_Icon_Box extends Widget_Base {
 	}
 
 	/**
+	 * Get widget icon.
+	 *
 	 * Retrieve icon box widget icon.
 	 *
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @return string Widget icon.
@@ -44,10 +57,13 @@ class Widget_Icon_Box extends Widget_Base {
 	}
 
 	/**
+	 * Get widget categories.
+	 *
 	 * Retrieve the list of categories the icon box widget belongs to.
 	 *
 	 * Used to determine where to display the widget in the editor.
 	 *
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @return array Widget categories.
@@ -61,6 +77,7 @@ class Widget_Icon_Box extends Widget_Base {
 	 *
 	 * Adds different input fields to allow the user to change and customize the widget settings.
 	 *
+	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function _register_controls() {
@@ -118,7 +135,7 @@ class Widget_Icon_Box extends Widget_Base {
 				'label' => __( 'Title & Description', 'elementor' ),
 				'type' => Controls_Manager::TEXT,
 				'default' => __( 'This is the heading', 'elementor' ),
-				'placeholder' => __( 'Your Title', 'elementor' ),
+				'placeholder' => __( 'Enter your title', 'elementor' ),
 				'label_block' => true,
 			]
 		);
@@ -129,8 +146,7 @@ class Widget_Icon_Box extends Widget_Base {
 				'label' => '',
 				'type' => Controls_Manager::TEXTAREA,
 				'default' => __( 'Click edit button to change this text. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.', 'elementor' ),
-				'placeholder' => __( 'Your Description', 'elementor' ),
-				'title' => __( 'Input icon text here', 'elementor' ),
+				'placeholder' => __( 'Enter your description', 'elementor' ),
 				'rows' => 10,
 				'separator' => 'none',
 				'show_label' => false,
@@ -142,7 +158,7 @@ class Widget_Icon_Box extends Widget_Base {
 			[
 				'label' => __( 'Link to', 'elementor' ),
 				'type' => Controls_Manager::URL,
-				'placeholder' => __( 'http://your-link.com', 'elementor' ),
+				'placeholder' => __( 'https://your-link.com', 'elementor' ),
 				'separator' => 'before',
 			]
 		);
@@ -178,15 +194,15 @@ class Widget_Icon_Box extends Widget_Base {
 				'label' => __( 'Title HTML Tag', 'elementor' ),
 				'type' => Controls_Manager::SELECT,
 				'options' => [
-					'h1' => __( 'H1', 'elementor' ),
-					'h2' => __( 'H2', 'elementor' ),
-					'h3' => __( 'H3', 'elementor' ),
-					'h4' => __( 'H4', 'elementor' ),
-					'h5' => __( 'H5', 'elementor' ),
-					'h6' => __( 'H6', 'elementor' ),
-					'div' => __( 'div', 'elementor' ),
-					'span' => __( 'span', 'elementor' ),
-					'p' => __( 'p', 'elementor' ),
+					'h1' => 'H1',
+					'h2' => 'H2',
+					'h3' => 'H3',
+					'h4' => 'H4',
+					'h5' => 'H5',
+					'h6' => 'H6',
+					'div' => 'div',
+					'span' => 'span',
+					'p' => 'p',
 				],
 				'default' => 'h3',
 			]
@@ -235,7 +251,7 @@ class Widget_Icon_Box extends Widget_Base {
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'icon_space',
 			[
 				'label' => __( 'Spacing', 'elementor' ),
@@ -253,11 +269,12 @@ class Widget_Icon_Box extends Widget_Base {
 					'{{WRAPPER}}.elementor-position-right .elementor-icon-box-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}}.elementor-position-left .elementor-icon-box-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
 					'{{WRAPPER}}.elementor-position-top .elementor-icon-box-icon' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+					'(mobile){{WRAPPER}} .elementor-icon-box-icon' => 'margin-bottom: {{SIZE}}{{UNIT}};',
 				],
 			]
 		);
 
-		$this->add_control(
+		$this->add_responsive_control(
 			'icon_size',
 			[
 				'label' => __( 'Size', 'elementor' ),
@@ -380,7 +397,7 @@ class Widget_Icon_Box extends Widget_Base {
 		$this->add_control(
 			'hover_animation',
 			[
-				'label' => __( 'Animation', 'elementor' ),
+				'label' => __( 'Hover Animation', 'elementor' ),
 				'type' => Controls_Manager::HOVER_ANIMATION,
 			]
 		);
@@ -532,6 +549,7 @@ class Widget_Icon_Box extends Widget_Base {
 	 *
 	 * Written in PHP and used to generate the final HTML.
 	 *
+	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function render() {
@@ -558,20 +576,26 @@ class Widget_Icon_Box extends Widget_Base {
 
 		$icon_attributes = $this->get_render_attribute_string( 'icon' );
 		$link_attributes = $this->get_render_attribute_string( 'link' );
+
+		$this->add_render_attribute( 'description_text', 'class', 'elementor-icon-box-description' );
+
+		$this->add_inline_editing_attributes( 'title_text', 'none' );
+
+		$this->add_inline_editing_attributes( 'description_text' );
 		?>
-		<div class="elementor-icon-box-wrapper">
-			<div class="elementor-icon-box-icon">
-				<<?php echo implode( ' ', [ $icon_tag, $icon_attributes, $link_attributes ] ); ?>>
-					<i <?php echo $this->get_render_attribute_string( 'i' ); ?>></i>
-				</<?php echo $icon_tag; ?>>
-			</div>
-			<div class="elementor-icon-box-content">
-				<<?php echo $settings['title_size']; ?> class="elementor-icon-box-title">
-					<<?php echo implode( ' ', [ $icon_tag, $link_attributes ] ); ?>><?php echo $settings['title_text']; ?></<?php echo $icon_tag; ?>>
-				</<?php echo $settings['title_size']; ?>>
-				<p class="elementor-icon-box-description"><?php echo $settings['description_text']; ?></p>
-			</div>
-		</div>
+        <div class="elementor-icon-box-wrapper">
+            <div class="elementor-icon-box-icon">
+                <<?php echo implode( ' ', [ $icon_tag, $icon_attributes, $link_attributes ] ); ?>>
+                    <i <?php echo $this->get_render_attribute_string( 'i' ); ?>></i>
+                </<?php echo $icon_tag; ?>>
+            </div>
+            <div class="elementor-icon-box-content">
+                <<?php echo $settings['title_size']; ?> class="elementor-icon-box-title">
+                    <<?php echo implode( ' ', [ $icon_tag, $link_attributes ] ); ?> <?php echo $this->get_render_attribute_string( 'title_text' ); ?>><?php echo $settings['title_text']; ?></<?php echo $icon_tag; ?>>
+                </<?php echo $settings['title_size']; ?>>
+                <p <?php echo $this->get_render_attribute_string( 'description_text' ); ?>><?php echo $settings['description_text']; ?></p>
+            </div>
+        </div>
 		<?php
 	}
 
@@ -580,25 +604,33 @@ class Widget_Icon_Box extends Widget_Base {
 	 *
 	 * Written as a Backbone JavaScript template and used to generate the live preview.
 	 *
+	 * @since 1.0.0
 	 * @access protected
 	 */
 	protected function _content_template() {
 		?>
-		<# var link = settings.link.url ? 'href="' + settings.link.url + '"' : '',
-				iconTag = link ? 'a' : 'span'; #>
-		<div class="elementor-icon-box-wrapper">
-			<div class="elementor-icon-box-icon">
-				<{{{ iconTag + ' ' + link }}} class="elementor-icon elementor-animation-{{ settings.hover_animation }}">
-					<i class="{{ settings.icon }}"></i>
-				</{{{ iconTag }}}>
-			</div>
-			<div class="elementor-icon-box-content">
-				<{{{ settings.title_size }}} class="elementor-icon-box-title">
-					<{{{ iconTag + ' ' + link }}}>{{{ settings.title_text }}}</{{{ iconTag }}}>
-				</{{{ settings.title_size }}}>
-				<p class="elementor-icon-box-description">{{{ settings.description_text }}}</p>
-			</div>
-		</div>
+        <#
+        var link = settings.link.url ? 'href="' + settings.link.url + '"' : '',
+			iconTag = link ? 'a' : 'span';
+
+        view.addRenderAttribute( 'description_text', 'class', 'elementor-icon-box-description' );
+
+        view.addInlineEditingAttributes( 'title_text', 'none' );
+        view.addInlineEditingAttributes( 'description_text' );
+        #>
+        <div class="elementor-icon-box-wrapper">
+            <div class="elementor-icon-box-icon">
+                <{{{ iconTag + ' ' + link }}} class="elementor-icon elementor-animation-{{ settings.hover_animation }}">
+                    <i class="{{ settings.icon }}"></i>
+                </{{{ iconTag }}}>
+            </div>
+            <div class="elementor-icon-box-content">
+                <{{{ settings.title_size }}} class="elementor-icon-box-title">
+                    <{{{ iconTag + ' ' + link }}} {{{ view.getRenderAttributeString( 'title_text' ) }}}>{{{ settings.title_text }}}</{{{ iconTag }}}>
+                </{{{ settings.title_size }}}>
+                <p {{{ view.getRenderAttributeString( 'description_text' ) }}}>{{{ settings.description_text }}}</p>
+            </div>
+        </div>
 		<?php
 	}
 }
